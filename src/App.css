@@ -1,0 +1,21 @@
+#accordion-container {
+    width: 400px; /* Set the width of the container */
+    height: 400px; /* Set the height of the container */
+    /* Additional styles for the container */
+    position: relative; /* Ensure relative positioning for children */
+  }
+  
+  /* Adjust the Accordion width to be a fixed 200px */
+  #accordion-container Accordion {
+    width: 100%;
+    height: 50%; /* Set the height to be 50% of the container */
+    max-height: calc(50% - 20px); /* Adjust max-height as needed */
+    max-width: 100%; /* Ensure it doesn't exceed the container's width */
+  }
+  
+  /* Adjust the Accordion.Item elements' styles if needed */
+  #accordion-container Accordion.Item {
+    /* Your custom styles for Accordion Items */
+    height: 100%; /* Ensure items take full height of Accordion */
+  }
+  
