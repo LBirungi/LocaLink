@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { AppShell, Burger, Group, TextInput } from "@mantine/core";
-import { IconPhoto, IconPrinter, IconCameraSelfie } from "@tabler/icons-react";
+import {IconMessageCircle } from "@tabler/icons-react";
 import { Accordion, rem } from "@mantine/core";
+import { BellRinging,BrandWechat} from 'tabler-icons-react';
 
 function Header({ opened, toggle }) {
   const [value, setValue] = useState("");
@@ -33,7 +34,7 @@ function Header({ opened, toggle }) {
           <Accordion.Item value="Notifications" style={{ marginRight: "10px" }}>
             <Accordion.Control
               icon={
-                <IconPhoto
+                <BellRinging
                   style={{
                     color: "var(--mantine-color-red-filled)",
                     width: "20px",
@@ -50,7 +51,7 @@ function Header({ opened, toggle }) {
           <Accordion.Item value="print" style={{ marginRight: "10px" }}>
             <Accordion.Control
               icon={
-                <IconPrinter
+                <IconMessageCircle
                   style={{
                     color: "var(--mantine-color-blue-filled)",
                     width: "20px",
@@ -67,7 +68,7 @@ function Header({ opened, toggle }) {
           <Accordion.Item value="camera">
             <Accordion.Control
               icon={
-                <IconCameraSelfie
+                <BrandWechat
                   style={{
                     color: "var(--mantine-color-teal-filled)",
                     width: "20px",
