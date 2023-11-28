@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { AppShell, Burger, Group, TextInput } from "@mantine/core";
-import { IconPhoto, IconPrinter, IconCameraSelfie } from "@tabler/icons-react";
-import { Accordion, rem } from "@mantine/core";
+import { AppShell, Burger, Group, TextInput,Popover, Text, Button} from "@mantine/core";
+import {IconMessageCircle } from "@tabler/icons-react";
+import { BellRinging,BrandWechat} from 'tabler-icons-react';
+
 
 function Header({ opened, toggle }) {
   const [value, setValue] = useState("");
@@ -12,7 +13,7 @@ function Header({ opened, toggle }) {
     <AppShell.Header>
       <Group h="100%" px="md">
         <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-       <div id="search-area">
+       {/* <div id="search-area">
        <TextInput
           label="Search"
           labelProps={{ "data-floating": floating }}
@@ -26,62 +27,18 @@ function Header({ opened, toggle }) {
           value={value}
           onChange={(event) => setValue(event.currentTarget.value)}
         />
-       </div>
+       </div> */}
+      
+        <Popover width={200} position="bottom" withArrow shadow="md">
+      <Popover.Target>
+        <Button type="submit" id="popover">Toggle popover</Button>
+      </Popover.Target>
+      <Popover.Dropdown>
+        <Text size="xs">This is uncontrolled popover, it is opened when button is clicked</Text>
+      </Popover.Dropdown>
+    </Popover>
+       
 
-        <div id="accordion-container">
-        <Accordion variant="contained" style={{ display: "flex" }}>
-          <Accordion.Item value="Notifications" style={{ marginRight: "10px" }}>
-            <Accordion.Control
-              icon={
-                <IconPhoto
-                  style={{
-                    color: "var(--mantine-color-red-filled)",
-                    width: "20px",
-                    height: "20px",
-                  }}
-                />
-              }
-            >
-              Notifications
-            </Accordion.Control>
-            <Accordion.Panel>Content</Accordion.Panel>
-          </Accordion.Item>
-
-          <Accordion.Item value="print" style={{ marginRight: "10px" }}>
-            <Accordion.Control
-              icon={
-                <IconPrinter
-                  style={{
-                    color: "var(--mantine-color-blue-filled)",
-                    width: "20px",
-                    height: "20px",
-                  }}
-                />
-              }
-            >
-              Messages
-            </Accordion.Control>
-            <Accordion.Panel>Content</Accordion.Panel>
-          </Accordion.Item>
-
-          <Accordion.Item value="camera">
-            <Accordion.Control
-              icon={
-                <IconCameraSelfie
-                  style={{
-                    color: "var(--mantine-color-teal-filled)",
-                    width: "20px",
-                    height: "20px",
-                  }}
-                />
-              }
-            >
-              Recent Chats
-            </Accordion.Control>
-            <Accordion.Panel>Content</Accordion.Panel>
-          </Accordion.Item>
-        </Accordion>
-        </div>
 
 
       </Group>
