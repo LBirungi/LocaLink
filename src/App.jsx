@@ -1,37 +1,31 @@
-import { useState } from 'react'
-import './App.css'
-import '@mantine/core/styles.css';
-import { MantineProvider } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { AppShell, Burger, Group, Skeleton, Text } from '@mantine/core';
+
 import Header from './assets/components/Header';
-import Navbar from './assets/components/Navbar';
-import Main from './assets/components/Main';
-import Aside from './assets/components/Aside';
 import Footer from './assets/components/Footer';
+import Navbar from './Navbar';
+
+
+
+
+
 
 function App() {
-  const [opened, { toggle }] = useDisclosure();
-
+  
   return (
-    <MantineProvider>
-    <AppShell
-      layout="alt"
-      header={{ height: 60 }}
-      footer={{ height: 60 }}
-      navbar={{ width: 300, breakpoint: 'sm', collapsed: { mobile: !opened } }}
-      aside={{ width: 300, breakpoint: 'md', collapsed: { desktop: false, mobile: true } }}
-      padding="md"
-    >
-      <Header opened={opened} toggle={toggle} />
-      <Navbar opened={opened} toggle={toggle} />
-      <Main/>
-      <Aside/>
+    <div className="flex h-screen">
+      <Navbar/>
+     <div 
+     className="hidden 1g:block w-1/2 bg-cover bg-center"
+     style={{backgroundImage:'url("")'}}></div>
+     <div className="w-full 1g:w-1/2 p-8 flex flex-col 
+     justify-center items-center">
+      <Header/>
       <Footer/>
-    </AppShell>
-    </MantineProvider>
-  )
-}
+      </div>
+      </div>
+  );
+};
+export default App;
 
-export default App
 
+
+    
