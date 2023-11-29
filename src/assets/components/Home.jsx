@@ -2,7 +2,7 @@ import React from "react";
 
 function Home(){
     return(
-        <div><h1> Johnson use this to setup your homepage </h1></div>
-    )
+        <h1>Please Johnson use this for the landing page</h1>
+    );
 }
 export default Home;

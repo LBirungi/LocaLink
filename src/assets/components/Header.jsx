@@ -1,8 +1,16 @@
 import React, { useState } from "react";
-import { AppShell, Burger, Group, TextInput,Popover, Text, Button} from "@mantine/core";
-import {IconMessageCircle } from "@tabler/icons-react";
-import { BellRinging,BrandWechat} from 'tabler-icons-react';
-
+import {
+  AppShell,
+  Burger,
+  Group,
+  TextInput,
+  Popover,
+  Text,
+  Button,
+} from "@mantine/core";
+import { IconMessageCircle } from "@tabler/icons-react";
+import { BellRinging, BrandWechat } from "tabler-icons-react";
+import { SearchIcon } from '@mantine/icons';
 
 function Header({ opened, toggle }) {
   const [value, setValue] = useState("");
@@ -11,9 +19,9 @@ function Header({ opened, toggle }) {
 
   return (
     <AppShell.Header>
-      <Group h="100%" px="md">
+      <Group h="100%" px="md" className="bg-blue-950">
         <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-       {/* <div id="search-area">
+        {/* <div id="search-area">
        <TextInput
           label="Search"
           labelProps={{ "data-floating": floating }}
@@ -28,19 +36,116 @@ function Header({ opened, toggle }) {
           onChange={(event) => setValue(event.currentTarget.value)}
         />
        </div> */}
-      
         <Popover width={200} position="bottom" withArrow shadow="md">
-      <Popover.Target>
-        <Button type="submit" id="popover">Toggle popover</Button>
-      </Popover.Target>
-      <Popover.Dropdown>
-        <Text size="xs">This is uncontrolled popover, it is opened when button is clicked</Text>
-      </Popover.Dropdown>
-    </Popover>
-       
-
-
-
+          <Popover.Target>
+            <Button
+              type="submit"
+              id="popover"
+              className="rounded-md text-white"
+              style={{
+                transition: "color 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = "transparent";
+                e.target.style.color = "#DAC0A3";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.color = "inherit";
+              }}
+            >
+              <BellRinging
+                size={20}
+                strokeWidth={1.5}
+                style={{ marginRight: "0.5em" }}
+              />
+              Notification
+            </Button>
+          </Popover.Target>
+          <Popover.Dropdown>
+            <Text size="xs">This is a notification</Text>
+          </Popover.Dropdown>
+        </Popover>
+        <Popover width={200} position="bottom" withArrow shadow="md">
+          <Popover.Target>
+            <Button
+              type="submit"
+              id="popover"
+              className="rounded-md text-white"
+              style={{
+                transition: "color 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = "transparent";
+                e.target.style.color = "#DAC0A3";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.color = "inherit";
+              }}
+            >
+              <IconMessageCircle
+                size={20}
+                strokeWidth={1.5}
+                style={{ marginRight: "0.5em" }}
+              />
+              Messages
+            </Button>
+          </Popover.Target>
+          <Popover.Dropdown>
+            <Text size="xs">Your Recent Messages</Text>
+          </Popover.Dropdown>
+        </Popover>
+        <Popover width={200} position="bottom" withArrow shadow="md">
+          <Popover.Target>
+            <Button
+              type="submit"
+              id="popover"
+              className="rounded-md text-white"
+              style={{
+                transition: "color 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = "transparent";
+                e.target.style.color = "#DAC0A3";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.color = "inherit";
+              }}
+            >
+              <BrandWechat
+                size={20}
+                strokeWidth={1.5}
+                style={{ marginRight: "0.5em" }}
+              />
+              Recent Chats
+            </Button>
+          </Popover.Target>
+          <Popover.Dropdown>
+            <Text size="xs">Your Recent Chats</Text>
+          </Popover.Dropdown>
+        </Popover>
+        <div id="search-area">
+      <div className={`search-container ${focused ? 'focused' : ''}`}>
+        <div className="input-container">
+          <TextInput
+            icon={<Search size={18} strokeWidth={1.5} />}
+            placeholder="Enter search text"
+            value={value}
+            onChange={(event) => setValue(event.currentTarget.value)}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+            rightSectionWidth={44} // Adjust the width to fit the icon properly
+          />
+        </div>
+      </div>
+      <button
+        onClick={() => {
+          console.log('Searching:', value);
+          // Implement search functionality
+        }}
+      >
+        Search
+      </button>
+    </div>
       </Group>
     </AppShell.Header>
   );
