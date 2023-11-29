@@ -7,7 +7,7 @@ function DiscoverMain() {
     <AppShell.Main>
       <div className="relative min-h-screen">
         <BackgroundImage
-          src="../src/assets/discoverimage.jpg"
+          src="../src/discovercomponents/discoverimage.jpg"
           radius="sm"
           className="mx-auto max-w-screen-xl w-1/3 h-1/4 bg-cover bg-center md:p-14 "
         >
