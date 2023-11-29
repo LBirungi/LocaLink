@@ -1,33 +1,47 @@
 import React from "react";
 import { AppShell, Avatar, Button } from "@mantine/core";
 
-function Aside() {
-  const members = [
-    // Existing member data including Grace Nabulime's profile
-    {
-      name: "Lillian Birungi",
-      username: "@LillianBirungi",
-      lastActive: "Online",
-      avatar: "/avatarprofile.jpg", // Path to Grace's avatar image
-    },
-    {
-      name: "Johnson Byaruhanga",
-      username: "@JohnsonB",
-      lastActive: "3 hours ago",
-      avatar: "/johnson.jpg", // Path to Johnson's avatar image
-    },
-    {
-      name: "Ronnie Kagulie",
-      username: "@RonnieK",
-      lastActive: "5 days ago",
-      avatar: "/ronnie.jpg", // Path to Ronnie's avatar image
-    },
-  ];
+const members = [
+  {
+    name: "Grace Nabulime",
+    username: "@GraceNabulime",
+    lastActive: "Online",
+    avatar: "/avatarprofile.jpg", // Path to Grace's avatar image
+    recentActivity: "Liked a post", // Recent activity for Grace
+  },
+  {
+    name: "Johnson Byaruhanga",
+    username: "@JohnsonB",
+    lastActive: "3 hours ago",
+    avatar: "/johnson.jpg", // Path to Johnson's avatar image
+    recentActivity: "Commented on a project", // Recent activity for Johnson
+  },
+  {
+    name: "Ronnie Kagulie",
+    username: "@RonnieK",
+    lastActive: "5 days ago",
+    avatar: "/ronnie.jpg", // Path to Ronnie's avatar image
+    recentActivity: "Shared an activity", // Recent activity for Ronnie
+  },
+];
 
+function RecentActivity({ member }) {
+  return (
+    <div key={member.name} className="mb-2">
+      <p className="text-gray-500">
+        <span className="font-semibold">{member.name}</span>{" "}
+        {member.recentActivity} <span className="text-gray-700">• {member.lastActive}</span>
+      </p>
+    </div>
+  );
+}
+
+function Aside() {
   return (
     <AppShell.Aside p="md" className="h-full px-4 bg-blue-950">
       <div className="flex justify-center items-start min-h-screen text-white">
         <div className="flex flex-col items-center w-full">
+          {/* Profile section for Grace Nabulime */}
           <div className="mt-4 mb-6">
             {/* Display Grace Nabulime's profile */}
             <div className="relative">
@@ -51,19 +65,14 @@ function Aside() {
               <p className="text-sm font-semibold">Grace Nabulime</p>
               <p className="text-xs">@GraceNabulime</p>
             </div>
-            {/* Button for Grace */}
-            <div className="mt-2">
-              <Button variant="outline" size="sm">
-                Follow
-              </Button>
-            </div>
           </div>
+
           {/* New Members section */}
           <div className="text-left">
             <h3 className="text-sm font-semibold mb-2">New Members</h3>
-            {/* Display avatars and information for all members */}
+            {/* Display avatars, information, and Follow button for all members */}
             <div className="flex flex-wrap justify-center">
-              {members.map((member, index) => (
+              {members.slice(1).map((member, index) => (
                 <div key={index} className="flex items-center m-2">
                   <Avatar
                     size={40}
@@ -75,8 +84,22 @@ function Aside() {
                     <p className="text-sm font-semibold">{member.name}</p>
                     <p className="text-xs text-gray-500">{member.username}</p>
                     <p className="text-xs text-gray-500">{`Last active: ${member.lastActive}`}</p>
+                    <Button variant="outline" size="xs" className="mt-1">
+                      Follow
+                    </Button>
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Recent Activity section */}
+          <div className="mt-6 text-left">
+            <h3 className="text-sm font-semibold mb-2">Recent Activity</h3>
+            {/* Display recent activity for all members */}
+            <div className="text-xs">
+              {members.map((member) => (
+                <RecentActivity member={member} />
               ))}
             </div>
           </div>
