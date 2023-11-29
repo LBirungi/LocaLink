@@ -1,11 +1,12 @@
 import React from "react";
 import { AppShell} from '@mantine/core';
+import { Badge, Text, Card, Image, Group, Avatar, Title } from '@mantine/core';
 
 function Main(){
     return(
       
-        <AppShell.Main>
-        <h1>Localink-</h1>
+        <AppShell.Main>      
+
       </AppShell.Main>
     )
 }

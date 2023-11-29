@@ -16,8 +16,8 @@ function Dashboard() {
       layout="alt"
       header={{ height: 60 }}
       footer={{ height: 60 }}
-      navbar={{ width: 300, breakpoint: 'sm', collapsed: { mobile: !opened } }}
-      aside={{ width: 300, breakpoint: 'md', collapsed: { desktop: false, mobile: true } }}
+      navbar={{ width: 200, breakpoint: 'sm', collapsed: { mobile: !opened } }}
+      aside={{ width: 150, breakpoint: 'md', collapsed: { desktop: false, mobile: true } }}
       padding="md"
     >
       <Header opened={opened} toggle={toggle} />
