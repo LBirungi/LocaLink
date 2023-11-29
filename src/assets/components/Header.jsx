@@ -10,7 +10,6 @@ import {
 } from "@mantine/core";
 import { IconMessageCircle } from "@tabler/icons-react";
 import { BellRinging, BrandWechat } from "tabler-icons-react";
-import { SearchIcon } from '@mantine/icons';
 
 function Header({ opened, toggle }) {
   const [value, setValue] = useState("");
@@ -123,29 +122,6 @@ function Header({ opened, toggle }) {
             <Text size="xs">Your Recent Chats</Text>
           </Popover.Dropdown>
         </Popover>
-        <div id="search-area">
-      <div className={`search-container ${focused ? 'focused' : ''}`}>
-        <div className="input-container">
-          <TextInput
-            icon={<Search size={18} strokeWidth={1.5} />}
-            placeholder="Enter search text"
-            value={value}
-            onChange={(event) => setValue(event.currentTarget.value)}
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
-            rightSectionWidth={44} // Adjust the width to fit the icon properly
-          />
-        </div>
-      </div>
-      <button
-        onClick={() => {
-          console.log('Searching:', value);
-          // Implement search functionality
-        }}
-      >
-        Search
-      </button>
-    </div>
       </Group>
     </AppShell.Header>
   );
