@@ -1,66 +1,107 @@
 import React from "react";
-import { AppShell, Card, Title, Text, Badge, Button } from '@mantine/core';
+import { AppShell, Card, Title, Text, Badge, Button } from "@mantine/core";
 
 function Main() {
   return (
-    <div style={{ maxHeight: 'calc(100vh - 100px)', overflowY: 'auto' }}>
-      <AppShell.Main className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6">
-        <Section title="Nearby Communities">
-          <CustomCard
-            title="Community 1"
-            text="Some text describing Community 1."
-            views={123}
-            imageUrl="https://via.placeholder.com/50x50"
-          />
-          <CustomCard
-            title="Community 2"
-            text="Some text describing Community 2."
-            views={456}
-            imageUrl="https://via.placeholder.com/50x50"
-          />
-        </Section>
+    <div className="min-h-screen flex justify-center items-center bg-gray-100">
+      <div className="w-full max-w-screen-lg p-4">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
+          <Section title="Nearby Communities">
+            {/* CustomCard components for Nearby Communities */}
+            {/* ... */}
+          </Section>
 
-        <Section title="Community Updates">
-          <CustomCard
-            title="Update 1"
-            text="Content of the first update."
-            views={789}
-            imageUrl="https://via.placeholder.com/150x100"
-          />
-          <CustomCard
-            title="Update 2"
-            text="Content of the second update."
-            views={101}
-            imageUrl="https://via.placeholder.com/150x100"
-          />
-        </Section>
+          <Section title="Other Communities">
+            {/* Additional CustomCard components for Other Communities */}
+            <CustomCard
+              title="Community 5"
+              text="Some text describing Community 5."
+              views={131415}
+              imageUrl="https://via.placeholder.com/50x50"
+            />
+            <CustomCard
+              title="Community 6"
+              text="Some text describing Community 6."
+              views={161718}
+              imageUrl="https://via.placeholder.com/50x50"
+            />
+            {/* Add more CustomCard components for other communities in this section */}
+          </Section>
 
-        <Section title="Trending Posts">
-          <CustomCard
-            title="Trending Post 1"
-            text="Content of the first trending post."
-            views={222}
-            imageUrl="https://via.placeholder.com/150x100"
-          />
-          <CustomCard
-            title="Trending Post 2"
-            text="Content of the second trending post."
-            views={333}
-            imageUrl="https://via.placeholder.com/50x50"
-          />
-        </Section>
-      </AppShell.Main>
+          <Section title="Trending Posts">
+            {/* Additional CustomCard components for More Communities */}
+
+            <CustomCard
+              title="Flooded Roads"
+              text="This road is in need of major repair ."
+              views={222324}
+              imageUrl="/road.png"
+            />
+            <CustomCard
+              title="Stray Dogs"
+              text="there is an increase in the amount of  stray dogs intimidating residemts of Mengo"
+              views={192021}
+              imageUrl="/straydogs.webp"
+            />
+            {/* Add more CustomCard components for other communities in this section */}
+          </Section>
+
+          <Section title="Additional Communities">
+            {/* Additional CustomCard components for Additional Communities */}
+            <CustomCard
+              title="Community 9"
+              text="Some text describing Community 9."
+              views={252627}
+              imageUrl="https://via.placeholder.com/50x50"
+            />
+            {/* Add more CustomCard components for other communities in this section */}
+          </Section>
+
+          <Section title="Trending Posts">
+            {/* Additional CustomCard components for More Communities */}
+            <CustomCard
+              title="Stray Dogs"
+              text="there is an increase in the amount of  stray dogs intimidating residemts of Mengo"
+              views={192021}
+              imageUrl="/straydogs.webp"
+            />
+            <CustomCard
+              title="Flooded Roads"
+              text="This road is in need of major repair ."
+              views={222324}
+              imageUrl="/road.png"
+            />
+            {/* Add more CustomCard components for other communities in this section */}
+          </Section>
+
+          <Section title="Additional Communities">
+            {/* Additional CustomCard components for Additional Communities */}
+            <CustomCard
+              title="Community 9"
+              text="Some text describing Community 9."
+              views={252627}
+              imageUrl="https://via.placeholder.com/50x50"
+            />
+            <CustomCard
+              title="Community 10"
+              text="Some text describing Community 10."
+              views={282930}
+              imageUrl="https://via.placeholder.com/50x50"
+            />
+            {/* Add more CustomCard components for other communities in this section */}
+          </Section>
+        </div>
+      </div>
     </div>
   );
 }
 
-// Section Component
 const Section = ({ title, children }) => {
   return (
-    <Card shadow="sm" radius="md" className="mb-4">
+    <Card shadow="sm" radius="md" className="mb-4 w-full">
       <Card.Section>
         <Title order={3}>{title}</Title>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mt-4 p-4 rounded-lg">
           {children}
         </div>
       </Card.Section>
@@ -68,34 +109,37 @@ const Section = ({ title, children }) => {
   );
 };
 
-// Custom Card Component
 const CustomCard = ({ title, text, views, imageUrl }) => {
   const handleLikeClick = () => {
     // Logic to handle like button click
-    console.log('Liked!');
+    console.log("Liked!");
   };
 
   return (
-    <Card shadow="sm" radius="sm">
+    <Card
+      shadow="sm"
+      radius="sm"
+      className="transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+    >
       <Card.Section>
-        <img src={imageUrl} alt={title} className="rounded-t-md w-full h-32 object-cover" />
+        <img
+          src={imageUrl}
+          alt={title}
+          className="rounded-t-md w-full h-32 object-cover"
+        />
         <div className="p-4">
           <Title order={4}>{title}</Title>
           <Text>{text}</Text>
           <div className="flex justify-between items-center mt-3">
-            <div>
-              <Badge variant="outline">Views: {views}</Badge>
-            </div>
-            <div>
-              <Button
-                onClick={handleLikeClick}
-                variant="outline"
-                color="blue"
-                radius="xl"
-              >
-                Like
-              </Button>
-            </div>
+            <Badge variant="outline">Views: {views}</Badge>
+            <Button
+              onClick={handleLikeClick}
+              variant="outline"
+              color="blue"
+              radius="xl"
+            >
+              Like
+            </Button>
           </div>
         </div>
       </Card.Section>
