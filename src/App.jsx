@@ -5,15 +5,16 @@ import Discover from "./discovercomponents/Discover";
 import Homeland from "./landing/Homeland.jsx";
 import Opportunities from "./servicescomponents/Opportunities.jsx";
 import Signup from "./landing/Signup.jsx";
+
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Homeland />} />
         <Route path="home" element={<Home />} />
-        <Route path="signup"  element={<Signup />}/>
+        <Route path="signup"  element={<Signup/>} />
         <Route path="discover" element={<Discover/>} />
-        <Route path="opportunities" element={<Opportunities />} />
+        <Route path="opportunities" element={<Opportunities/>} />
         <Route path="dashboard" element={<Dashboard />} />
         
       </Routes>

@@ -1,11 +1,25 @@
 import React from "react";
 
-function Navland(){
-    return(
-        <h1>Please Johnson use this for Nav</h1>
+// Navland.jsx
+function Navland() {
+    // Your navigation component code here
+    return (
+      <nav>
+        {/* Your navigation links or components */}
+        <ul>
+          <li>Link 1</li>
+          <li>Link 2</li>
+          {/* Add more navigation items as needed */}
+        </ul>
+      </nav>
     );
-        
+  }
+  
+  export default Navland; 
     
-}
 
-export default Navland;
+
+
+
+
+
