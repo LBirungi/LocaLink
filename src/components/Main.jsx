@@ -1,114 +1,6 @@
 import React from "react";
 import { AppShell, Card, Title, Text, Badge, Button } from "@mantine/core";
 
-function Main() {
-  return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100">
-      <div className="w-full max-w-screen-lg p-4">
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
-          <Section title="Nearby Communities">
-            {/* CustomCard components for Nearby Communities */}
-            {/* ... */}
-          </Section>
-
-          <Section title="Other Communities">
-            {/* Additional CustomCard components for Other Communities */}
-            <CustomCard
-              title="Community 5"
-              text="Some text describing Community 5."
-              views={131415}
-              imageUrl="https://via.placeholder.com/50x50"
-            />
-            <CustomCard
-              title="Community 6"
-              text="Some text describing Community 6."
-              views={161718}
-              imageUrl="https://via.placeholder.com/50x50"
-            />
-            {/* Add more CustomCard components for other communities in this section */}
-          </Section>
-
-          <Section title="Trending Posts">
-            {/* Additional CustomCard components for More Communities */}
-
-            <CustomCard
-              title="Flooded Roads"
-              text="This road is in need of major repair ."
-              views={222324}
-              imageUrl="/road.png"
-            />
-            <CustomCard
-              title="Stray Dogs"
-              text="there is an increase in the amount of  stray dogs intimidating residemts of Mengo"
-              views={192021}
-              imageUrl="/straydogs.webp"
-            />
-            {/* Add more CustomCard components for other communities in this section */}
-          </Section>
-
-          <Section title="Additional Communities">
-            {/* Additional CustomCard components for Additional Communities */}
-            <CustomCard
-              title="Community 9"
-              text="Some text describing Community 9."
-              views={252627}
-              imageUrl="https://via.placeholder.com/50x50"
-            />
-            {/* Add more CustomCard components for other communities in this section */}
-          </Section>
-
-          <Section title="Trending Posts">
-            {/* Additional CustomCard components for More Communities */}
-            <CustomCard
-              title="Stray Dogs"
-              text="there is an increase in the amount of  stray dogs intimidating residemts of Mengo"
-              views={192021}
-              imageUrl="/straydogs.webp"
-            />
-            <CustomCard
-              title="Flooded Roads"
-              text="This road is in need of major repair ."
-              views={222324}
-              imageUrl="/road.png"
-            />
-            {/* Add more CustomCard components for other communities in this section */}
-          </Section>
-
-          <Section title="Additional Communities">
-            {/* Additional CustomCard components for Additional Communities */}
-            <CustomCard
-              title="Community 9"
-              text="Some text describing Community 9."
-              views={252627}
-              imageUrl="https://via.placeholder.com/50x50"
-            />
-            <CustomCard
-              title="Community 10"
-              text="Some text describing Community 10."
-              views={282930}
-              imageUrl="https://via.placeholder.com/50x50"
-            />
-            {/* Add more CustomCard components for other communities in this section */}
-          </Section>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-const Section = ({ title, children }) => {
-  return (
-    <Card shadow="sm" radius="md" className="mb-4 w-full">
-      <Card.Section>
-        <Title order={3}>{title}</Title>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mt-4 p-4 rounded-lg">
-          {children}
-        </div>
-      </Card.Section>
-    </Card>
-  );
-};
-
 const CustomCard = ({ title, text, views, imageUrl }) => {
   const handleLikeClick = () => {
     // Logic to handle like button click
@@ -141,6 +33,103 @@ const CustomCard = ({ title, text, views, imageUrl }) => {
               Like
             </Button>
           </div>
+        </div>
+      </Card.Section>
+    </Card>
+  );
+};
+
+function Main() {
+  const renderCustomCard = (title, text, views, imageUrl) => {
+    return (
+      <CustomCard
+        title={title}
+        text={text}
+        views={views}
+        imageUrl={imageUrl}
+      />
+    );
+  };
+
+  return (
+    <div className="min-h-screen flex justify-center items-center bg-gray-100">
+      <div className="w-full max-w-screen-lg p-4">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
+          {/* For You Section */}
+        
+          <Section title="For You">
+            {renderCustomCard(
+              "Community call",
+              "Residents of Rubaga for children immunisations on 12/12/2023 at the community centre",
+              223,
+              "/immunisation.webp"
+            )}
+            {/* Add more CustomCard components for other communities in this section */}
+          </Section>
+
+          {/* Upcoming Events Section */}
+          <Section title="Upcoming Events">
+            {renderCustomCard(
+              "Santas coming to town",
+              "Christmas extravaganza. Sunday, Dec 17",
+              415,
+              "/santa.jpeg"
+            )}
+            {renderCustomCard(
+              "Home decor & Upholstery Workshop",
+              "Saturday, Dec 16",
+              171,
+              "/curtains.webp"
+            )}
+            {/* Add more CustomCard components for other communities in this section */}
+          </Section>
+
+          {/* Trending Posts Section */}
+          <Section title="Trending Posts">
+            {renderCustomCard(
+              "Flooded Roads",
+              "This road is in need of major repair.",
+              222324,
+              "/road.png"
+            )}
+            {renderCustomCard(
+              "Stray Dogs",
+              "There is an increase in the amount of stray dogs intimidating residents of Mengo.",
+              192021,
+              "/straydogs.webp"
+            )}
+            {/* Add more CustomCard components for other communities in this section */}
+          </Section>
+
+          {/* Additional Trending Posts Section */}
+          <Section title="Nearby Business Recommendations">
+            {renderCustomCard(
+              " Baker-Coffee shop",
+              " Open until 19:30",
+              121,
+              "/bakery.jpeg"
+            )}
+            {renderCustomCard(
+              "JS Plumbers",
+              "contact us for your major repairs.",
+             324,
+              "/plumber.jpg"
+            )}
+            {/* Add more CustomCard components for other communities in this section */}
+          </Section>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const Section = ({ title, children }) => {
+  return (
+    <Card shadow="sm" radius="md" className="mb-4 w-full">
+      <Card.Section>
+        <Title order={3}>{title}</Title>
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mt-4 p-4 rounded-lg">
+          {children}
         </div>
       </Card.Section>
     </Card>
