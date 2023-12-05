@@ -14,10 +14,10 @@ function Dashboard() {
   return (
     <AppShell
       layout="alt"
-      header={{ height: 60 }}
-      footer={{ height: 60 }}
+      header={{ height: 40 }}
+      footer={{ height: 40 }}
       navbar={{ width: 200, breakpoint: 'sm', collapsed: { mobile: !opened } }}
-      aside={{ width: 200, breakpoint: 'md', collapsed: { desktop: false, mobile: true } }}
+      aside={{ width: 300, breakpoint: 'md', collapsed: { desktop: false, mobile: true } }}
       padding="md"
     >
       <Header opened={opened} toggle={toggle} />

@@ -6,31 +6,31 @@ const members = [
     name: "Grace Nabulime",
     username: "@GraceNabulime",
     lastActive: "Online",
-    avatar: "/avatarprofile.jpg", // Path to Grace's avatar image
-    recentActivity: "Liked a post", // Recent activity for Grace
+    avatar: "/avatarprofile.jpg",
+    recentActivity: "Liked a post",
   },
   {
     name: "Johnson Byaruhanga",
     username: "@JohnsonB",
     lastActive: "3 hours ago",
-    avatar: "/johnson.jpg", // Path to Johnson's avatar image
-    recentActivity: "Commented on a project", // Recent activity for Johnson
+    avatar: "/johnson.jpg",
+    recentActivity: "Commented on a project",
   },
   {
-    name: "Ronnie Kagulie",
+    name: "Ronnie Kagulire",
     username: "@RonnieK",
     lastActive: "5 days ago",
-    avatar: "/ronnie.jpg", // Path to Ronnie's avatar image
-    recentActivity: "Shared an activity", // Recent activity for Ronnie
+    avatar: "/ronnie.jpg",
+    recentActivity: "Shared an activity",
   },
 ];
 
-function RecentActivity({ member }) {
+function RecentActivity({ name, recentActivity, lastActive }) {
   return (
-    <div key={member.name} className="mb-2">
+    <div className="mb-2">
       <p className="text-gray-500">
-        <span className="font-semibold">{member.name}</span>{" "}
-        {member.recentActivity} <span className="text-gray-700">• {member.lastActive}</span>
+        <span className="font-semibold">{name}</span>{" "}
+        {recentActivity} <span className="text-gray-700">• {lastActive}</span>
       </p>
     </div>
   );
@@ -39,69 +39,69 @@ function RecentActivity({ member }) {
 function Aside() {
   return (
     <AppShell.Aside p="md" className="h-full px-4 bg-blue-950">
-      <div className="flex justify-center items-start min-h-screen text-white">
-        <div className="flex flex-col items-center w-full">
-          {/* Profile section for Grace Nabulime */}
-          <div className="mt-4 mb-6">
-            {/* Display Grace Nabulime's profile */}
-            <div className="relative">
-              <Avatar
-                variant="outline"
-                radius="lg"
-                size={100}
-                src="/avatarprofile.jpg"
-                className="rounded-full border-solid border-4 border-grey"
-                style={{
-                  clipPath:
-                    "polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%)",
-                }}
-              />
-              <p className="absolute bottom-0 right-0 bg-white text-black px-1 py-0.5 rounded text-xxxs">
-                Online
-              </p>
-            </div>
-            {/* Grace Nabulime's information */}
-            <div className="mt-2 text-center">
-              <p className="text-sm font-semibold">Grace Nabulime</p>
-              <p className="text-xs">@GraceNabulime</p>
-            </div>
-          </div>
+      <div className="flex flex-col items-center justify-start h-full text-white">
+        {/* Avatar section at the top */}
+        <div className="mt-4 mb-6">
+          <div className="relative">
+            <Avatar
+              variant="outline"
+              radius="xl"
+              size={200} // Increased size to make it bigger
+              src="/avatarprofile.jpg"
+              className="rounded-full border-solid border-14 border-white" // White border
+              style={{
+                clipPath:
+                  "polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%)",
+              }}
+            />
 
-          {/* New Members section */}
-          <div className="text-left">
-            <h3 className="text-sm font-semibold mb-2">New Members</h3>
-            {/* Display avatars, information, and Follow button for all members */}
-            <div className="flex flex-wrap justify-center">
-              {members.slice(1).map((member, index) => (
-                <div key={index} className="flex items-center m-2">
-                  <Avatar
-                    size={40}
-                    src={member.avatar}
-                    alt={member.name}
-                    className="mr-2 rounded-full border-solid border-2 border-gray-200"
-                  />
-                  <div>
-                    <p className="text-sm font-semibold">{member.name}</p>
-                    <p className="text-xs text-gray-500">{member.username}</p>
-                    <p className="text-xs text-gray-500">{`Last active: ${member.lastActive}`}</p>
-                    <Button variant="outline" size="xs" className="mt-1">
-                      Follow
-                    </Button>
-                  </div>
+            <p className="absolute bottom-0 right-0 bg-white text-black px-1 py-0.5 rounded text-xxxs">
+              Online
+            </p>
+          </div>
+          <div className="mt-2 text-center">
+            <p className="text-sm font-semibold">Grace Nabulime</p>
+            <p className="text-xs">@GraceNabulime</p>
+          </div>
+        </div>
+
+        {/* New Members section centered and shifted down */}
+        <div className="mt-20 text-center">
+          <h3 className="text-lg font-semibold mb-2">New Members</h3>
+          <div className="flex flex-wrap justify-center">
+            {members.slice(1).map((member, index) => (
+              <div key={index} className="flex items-center m-2">
+                <Avatar
+                  size={100}
+                  src={member.avatar}
+                  alt={member.name}
+                  className="mr-2 rounded-full border-4 border-gray-200"
+                />
+                <div>
+                  <p className="text-sm font-semibold">{member.name}</p>
+                  <p className="text-xs text-gray-500">{member.username}</p>
+                  <p className="text-xs text-gray-500">{`Last active: ${member.lastActive}`}</p>
+                  <Button variant="outline" size="xs" className="mt-1">
+                    Follow
+                  </Button>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
+        </div>
 
-          {/* Recent Activity section */}
-          <div className="mt-6 text-left">
-            <h3 className="text-sm font-semibold mb-2">Recent Activity</h3>
-            {/* Display recent activity for all members */}
-            <div className="text-xs">
-              {members.map((member) => (
-                <RecentActivity member={member} />
-              ))}
-            </div>
+        {/* Recent Activity section centered and moved down */}
+        <div className="mt-20 text-center">
+          <h3 className="text-lg font-semibold mb-2">Recent Activity</h3>
+          <div className="text-xs">
+            {members.map((member, index) => (
+              <RecentActivity
+                key={index}
+                name={member.name}
+                recentActivity={member.recentActivity}
+                lastActive={member.lastActive}
+              />
+            ))}
           </div>
         </div>
       </div>
