@@ -1,5 +1,5 @@
 import React from "react";
-import { AppShell, Avatar, Button } from "@mantine/core";
+import { Avatar, Button, Card } from "@mantine/core";
 
 const members = [
   {
@@ -38,17 +38,17 @@ function RecentActivity({ name, recentActivity, lastActive }) {
 
 function Aside() {
   return (
-    <AppShell.Aside p="md" className="h-full px-4 bg-blue-950">
-      <div className="flex flex-col items-center justify-start h-full text-white">
+    <aside className="p-4 bg-blue-950 h-full">
+      <div className="flex flex-col items-center justify-start text-white h-full">
         {/* Avatar section at the top */}
         <div className="mt-4 mb-6">
           <div className="relative">
             <Avatar
               variant="outline"
               radius="xl"
-              size={200} // Increased size to make it bigger
+              size={200}
               src="/avatarprofile.jpg"
-              className="rounded-full border-solid border-14 border-white" // White border
+              className="rounded-full border-solid border-14 border-white"
               style={{
                 clipPath:
                   "polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%)",
@@ -105,7 +105,7 @@ function Aside() {
           </div>
         </div>
       </div>
-    </AppShell.Aside>
+    </aside>
   );
 }
 
