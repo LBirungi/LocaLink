@@ -1,15 +1,18 @@
-import React from 'react';
-import '../App.css'
-import { useSpring, animated,config} from 'react-spring'
-import { LineChart, Line,XAxis,
+import React from "react";
+import "../App.css";
+import { useSpring, animated, config } from "react-spring";
+import {
+  LineChart,
+  Line,
+  XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer} from 'recharts';
+  ResponsiveContainer,
+} from "recharts";
 
 import clsx from "https://cdn.skypack.dev/clsx@1.1.1";
-const { useState } = React
-
+const { useState } = React;
 
 const map = (value, sMin, sMax, dMin, dMax) => {
   return dMin + ((value - sMin) / (sMax - sMin)) * (dMax - dMin);
@@ -20,72 +23,72 @@ const tau = 2 * pi;
 const employeeData = [
   {
     id: 1,
-    name: 'Lillian Birungi',
+    name: "Lillian Birungi",
     username: "@LillianBirungi",
-    transactions: 3490,
     rise: true,
-    tasksCompleted: 3,
-    imgId: 0,
+    location: "Nansana",
+    url: "/Lillian.jpeg",
+    lastSeen: "3 days ago",
   },
 
   {
     id: 2,
-    name: 'Eleanor Pena',
-    username: "Sale's manager Europe",
-    transactions: 590,
+    name: "Ronnie Kagulire",
+    username: "@RonnieKagulire",
     rise: false,
-    tasksCompleted: 5,
-    imgId: 2,
+    location: "Bwaise",
+    url: "/Ronald.png",
+    lastSeen: "3 days ago",
   },
 
   {
     id: 3,
-    name: 'Robert Fox',
-    username: "Sale's manager Asia",
-    transactions: 2600,
+    name: "Johnson Byaruhanga",
+    username: "@JohnsonByaruhanga",
     rise: true,
-    tasksCompleted: 1,
-    imgId: 3,
+    location: "Nabweru",
+    url: "/Johnson.png",
+    lastSeen: "20 days ago",
   },
 ];
 
 const Countrydata = [
-  { name: 'USA', rise: true, value: 21942.83, id: 1 },
-  { name: 'Ireland', rise: false, value: 19710.0, id: 2 },
-  { name: 'Ukraine', rise: false, value: 12320.3, id: 3 },
-  { name: 'Sweden', rise: true, value: 9725.0, id: 4 },
+  { name: "USA", rise: true, value: 21942.83, id: 1 },
+  { name: "Ireland", rise: false, value: 19710.0, id: 2 },
+  { name: "Ukraine", rise: false, value: 12320.3, id: 3 },
+  { name: "Sweden", rise: true, value: 9725.0, id: 4 },
 ];
 const segmentationData = [
-  { c1: 'Not Specified', c2: '800', c3: '#363636', color: '#535353' },
-  { c1: 'Male', c2: '441', c3: '#818bb1', color: '#595f77' },
-  { c1: 'Female', c2: '233', c3: '#2c365d', color: '#232942' },
-  { c1: 'Other', c2: '126', c3: '#334ed8', color: '#2c3051' },
+  { c1: "Not Specified", c2: "800", c3: "#363636", color: "#535353" },
+  { c1: "Male", c2: "441", c3: "#818bb1", color: "#595f77" },
+  { c1: "Female", c2: "233", c3: "#2c365d", color: "#232942" },
+  { c1: "Other", c2: "126", c3: "#334ed8", color: "#2c3051" },
 ];
 
 const sidebarItems = [
   [
-    { id: '0', title: 'Dashboard', notifications: false },
-    { id: '1', title: 'Overview', notifications: false },
-    { id: '2', title: 'Chat', notifications: 6 },
-    { id: '3', title: 'Team', notifications: false },
+    { id: "0", title: "Dashboard", notifications: false },
+    { id: "1", title: "Overview", notifications: false },
+    { id: "2", title: "Chat", notifications: 6 },
+    { id: "3", title: "Team", notifications: false },
   ],
   [
-    { id: '4', title: 'Tasks', notifications: false },
-    { id: '5', title: 'Reports', notifications: false },
-    { id: '6', title: 'Settings', notifications: false },
+    { id: "4", title: "Tasks", notifications: false },
+    { id: "5", title: "Reports", notifications: false },
+    { id: "6", title: "Settings", notifications: false },
   ],
 ];
 
 const graphData = [
-  'Nov',
-  'Dec',
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'June',
-  'July',
+  "Nov",
+  "Dec",
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "June",
+  "July",
 ].map((i) => {
   const revenue = 500 + Math.random() * 2000;
   const expectedRevenue = Math.max(revenue + (Math.random() - 0.5) * 2000, 0);
@@ -114,10 +117,10 @@ const Dashboard = () => {
       />
     </div>
   );
-}
+};
 
 function Sidebar({ onSidebarHide, showSidebar }) {
-  const [selected, setSelected] = useState('0');
+  const [selected, setSelected] = useState("0");
   const { dashOffset, indicatorWidth, precentage } = useSpring({
     dashOffset: 26.015,
     indicatorWidth: 70,
@@ -128,15 +131,14 @@ function Sidebar({ onSidebarHide, showSidebar }) {
   return (
     <div
       className={clsx(
-        'fixed inset-y-0 left-0 bg-card w-full sm:w-20 xl:w-60 sm:flex flex-col z-10',
-        showSidebar ? 'flex' : 'hidden',
+        "fixed inset-y-0 left-0 bg-card w-full sm:w-20 xl:w-60 sm:flex flex-col z-10",
+        showSidebar ? "flex" : "hidden"
       )}
     >
       <div className="flex-shrink-0 overflow-hidden p-2">
         <div className="flex items-center h-full sm:justify-center xl:justify-start p-2 sidebar-separator-top">
-          <IconButton icon="res-react-dash-logo" className="w-10 h-10" />
           <div className="block sm:hidden xl:block ml-2 font-bold text-xl text-white">
-            React
+            Localink
           </div>
           <div className="flex-grow sm:hidden xl:block" />
           <IconButton
@@ -185,7 +187,8 @@ function Sidebar({ onSidebarHide, showSidebar }) {
           <div
             className="rounded-xl w-full h-full px-3 sm:px-0 xl:px-3 overflow-hidden"
             style={{
-              backgroundImage: "url('https://assets.codepen.io/3685267/res-react-dash-usage-card.svg')",
+              backgroundImage:
+                "url('https://assets.codepen.io/3685267/res-react-dash-usage-card.svg')",
             }}
           >
             <div className="block sm:hidden xl:block pt-3">
@@ -254,7 +257,7 @@ function Sidebar({ onSidebarHide, showSidebar }) {
 
       <div className="flex-shrink-0 overflow-hidden p-2">
         <div className="flex items-center h-full sm:justify-center xl:justify-start p-2 sidebar-separator-bottom">
-          <Image path="mock_faces_8" className="w-10 h-10" />
+          <Image url="mock_faces_8" className="w-10 h-10" />
           <div className="block sm:hidden xl:block ml-2 font-bold ">
             Jerry Wilson
           </div>
@@ -272,8 +275,8 @@ function MenuItem({ item: { id, title, notifications }, onClick, selected }) {
   return (
     <div
       className={clsx(
-        'w-full mt-6 flex items-center px-3 sm:px-0 xl:px-3 justify-start sm:justify-center xl:justify-start sm:mt-6 xl:mt-3 cursor-pointer',
-        selected === id ? 'sidebar-item-selected' : 'sidebar-item',
+        "w-full mt-6 flex items-center px-3 sm:px-0 xl:px-3 justify-start sm:justify-center xl:justify-start sm:mt-6 xl:mt-3 cursor-pointer",
+        selected === id ? "sidebar-item-selected" : "sidebar-item"
       )}
       onClick={() => onClick(id)}
     >
@@ -300,13 +303,6 @@ function Content({ onSidebarHide }) {
             <div className="">
               <div className="flex items-center">
                 <div className="text-3xl font-bold text-white">Hello Grace</div>
-                <div className="flex items-center p-2 bg-card ml-2 rounded-xl">
-                  <Icon path="res-react-dash-premium-star" />
-
-                  <div className="ml-2 font-bold text-premium-yellow">
-                    Localink
-                  </div>
-                </div>
               </div>
               <div className="flex items-center">
                 <Icon
@@ -339,26 +335,18 @@ function Content({ onSidebarHide }) {
           </div>
         </div>
         {employeeData.map(
-          ({
-            id,
-            name,
-            username,
-            transactions,
-            rise,
-            tasksCompleted,
-            imgId,
-          }) => (
+          ({ id, name, username, rise, location, url, lastSeen }) => (
             <NameCard
               key={id}
               id={id}
               name={name}
               username={username}
-              transactionAmount={transactions}
               rise={rise}
-              tasksCompleted={tasksCompleted}
-              imgId={imgId}
+              location={location}
+              url={url}
+              lastSeen={lastSeen}
             />
-          ),
+          )
         )}
 
         <div className="w-full p-2 lg:w-2/3">
@@ -392,25 +380,17 @@ function Content({ onSidebarHide }) {
   );
 }
 
-function NameCard({
-  name,
-  username,
-  transactionAmount,
-  rise,
-  tasksCompleted,
-  imgId,
-}) {
-  const { transactions, barPlayhead } = useSpring({
-    transactions: transactionAmount,
+function NameCard({ name, username, rise, location, url, lastSeen }) {
+  const { barPlayhead } = useSpring({
     barPlayhead: 1,
-    from: { transactions: 0, barPlayhead: 0 },
+    from: { barPlayhead: 0 },
   });
   return (
     <div className="w-full p-2 lg:w-1/3">
       <div className="rounded-lg bg-card flex justify-between p-3 h-32">
         <div className="">
           <div className="flex items-center">
-            <Image path={`mock_faces_${imgId}`} className="w-10 h-10" />
+            <Image url={url} className="w-10 h-10" />
             <div className="ml-2">
               <div className="flex items-center">
                 <div className="mr-2 font-bold text-white">{name}</div>
@@ -420,50 +400,36 @@ function NameCard({
             </div>
           </div>
 
-          <div className="text-sm  mt-2">{`${tasksCompleted} from 5 tasks completed`}</div>
-          <svg
-            className="w-44 mt-3"
-            height="6"
-            viewBox="0 0 200 6"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect width="200" height="6" rx="3" fill="#2D2D2D" />
-            <animated.rect
-              width={barPlayhead.interpolate(
-                (i) => i * (tasksCompleted / 5) * 200,
-              )}
-              height="6"
-              rx="3"
-              fill="url(#paint0_linear)"
-            />
-            <rect x="38" width="2" height="6" fill="#171717" />
-            <rect x="78" width="2" height="6" fill="#171717" />
-            <rect x="118" width="2" height="6" fill="#171717" />
-            <rect x="158" width="2" height="6" fill="#171717" />
-            <defs>
-              <linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0">
-                <stop stopColor="#8E76EF" />
-                <stop offset="1" stopColor="#3912D2" />
-              </linearGradient>
-            </defs>
-          </svg>
+          <div className="text-sm  mt-2">{`${location}`}</div>
         </div>
         <div className="flex flex-col items-center">
-          <Icon
-            path={rise ? 'res-react-dash-bull' : 'res-react-dash-bear'}
-            className="w-8 h-8"
-          />
-          <animated.div
-            className={clsx(
-              rise ? 'text-green-500' : 'text-red-500',
-              'font-bold',
-              'text-lg',
-            )}
+          <button
+            type="button"
+            className="py-1 px-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
           >
-            {transactions.interpolate((i) => `$${i.toFixed(2)}`)}
-          </animated.div>
-          <div className="text-sm ">Last 6 month</div>
+            Connect
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-affiliate"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M5.931 6.936l1.275 4.249m5.607 5.609l4.251 1.275" />
+              <path d="M11.683 12.317l5.759 -5.759" />
+              <path d="M5.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0" />
+              <path d="M18.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0" />
+              <path d="M18.5 18.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0" />
+              <path d="M8.5 15.5m-4.5 0a4.5 4.5 0 1 0 9 0a4.5 4.5 0 1 0 -9 0" />
+            </svg>
+          </button>
+          <div className="text-sm py-6">{lastSeen}</div>
         </div>
       </div>
     </div>
@@ -486,7 +452,7 @@ function Graph() {
     <div className="flex p-4 h-full flex-col">
       <div className="">
         <div className="flex items-center">
-          <div className="font-bold text-white">Your Work Summary</div>
+          <div className="font-bold text-white">Local Faves</div>
           <div className="flex-grow" />
 
           <Icon path="res-react-dash-graph-range" className="w-4 h-4" />
@@ -498,47 +464,287 @@ function Graph() {
         <div className="font-bold ml-5">Nov - July</div>
       </div>
 
-      <div className="flex-grow">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart width={500} height={300} data={graphData}>
-            <defs>
-              <linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0">
-                <stop stopColor="#6B8DE3" />
-                <stop offset="1" stopColor="#7D1C8D" />
-              </linearGradient>
-            </defs>
-            <CartesianGrid
-              horizontal={false}
-              strokeWidth="6"
-              stroke="#252525"
+      {/* <div
+        id="controls-carousel"
+        className="relative w-full"
+        data-carousel="static"
+      >
+        <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
+          <div className="duration-700 ease-in-out" data-carousel-item>
+            <div className="max-w-sm w-full lg:max-w-full lg:flex">
+              <div
+                className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+                style={{ backgroundImage: "url('/immunisation.webp')" }}
+                title="Immunisation"
+              ></div>
+              <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                <div className="mb-8">
+                  <p className="text-sm text-gray-600 flex items-center">
+                    <svg
+                      className="fill-current text-gray-500 w-3 h-3 mr-2"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
+                    </svg>
+                    Members only
+                  </p>
+                  <div className="text-gray-900 font-bold text-xl mb-2">
+                    Can coffee make you a better developer?
+                  </div>
+                  <p className="text-gray-700 text-base">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Voluptatibus quia, nulla! Maiores et perferendis eaque,
+                    exercitationem praesentium nihil.
+                  </p>
+                </div>
+                <div className="flex items-center">
+                  <img
+                    className="w-10 h-10 rounded-full mr-4"
+                    src="/public/immunisation.webp"
+                  />
+                  <div className="text-sm">
+                    <p className="text-gray-900 leading-none">
+                      Jonathan Reinink
+                    </p>
+                    <p className="text-gray-600">Aug 18</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+          <div
+            className="hidden duration-700 ease-in-out"
+            data-carousel-item="active"
+          >
+            <div className="max-w-sm w-full lg:max-w-full lg:flex">
+              <div
+                className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+                style={{ backgroundImage: "url('/immunisation.webp')" }}
+                title="Immunisation"
+              ></div>
+              <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                <div className="mb-8">
+                  <p className="text-sm text-gray-600 flex items-center">
+                    <svg
+                      className="fill-current text-gray-500 w-3 h-3 mr-2"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
+                    </svg>
+                    Members only
+                  </p>
+                  <div className="text-gray-900 font-bold text-xl mb-2">
+                    Can coffee make you a better developer?
+                  </div>
+                  <p className="text-gray-700 text-base">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Voluptatibus quia, nulla! Maiores et perferendis eaque,
+                    exercitationem praesentium nihil.
+                  </p>
+                </div>
+                <div className="flex items-center">
+                  <img
+                    className="w-10 h-10 rounded-full mr-4"
+                    src="/public/immunisation.webp"
+                  />
+                  <div className="text-sm">
+                    <p className="text-gray-900 leading-none">
+                      Jonathan Reinink
+                    </p>
+                    <p className="text-gray-600">Aug 18</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="hidden duration-700 ease-in-out" data-carousel-item>
+            <div className="max-w-sm w-full lg:max-w-full lg:flex">
+              <div
+                className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+                style={{ backgroundImage: "url('/immunisation.webp')" }}
+                title="Immunisation"
+              ></div>
+              <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                <div className="mb-8">
+                  <p className="text-sm text-gray-600 flex items-center">
+                    <svg
+                      className="fill-current text-gray-500 w-3 h-3 mr-2"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
+                    </svg>
+                    Members only
+                  </p>
+                  <div className="text-gray-900 font-bold text-xl mb-2">
+                    Can coffee make you a better developer?
+                  </div>
+                  <p className="text-gray-700 text-base">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Voluptatibus quia, nulla! Maiores et perferendis eaque,
+                    exercitationem praesentium nihil.
+                  </p>
+                </div>
+                <div className="flex items-center">
+                  <img
+                    className="w-10 h-10 rounded-full mr-4"
+                    src="/santa.jpeg"
+                  />
+                  <div className="text-sm">
+                    <p className="text-gray-900 leading-none">
+                      Jonathan Reinink
+                    </p>
+                    <p className="text-gray-600">Aug 18</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="hidden duration-700 ease-in-out" data-carousel-item>
+            <img
+              src="/docs/images/carousel/carousel-4.svg"
+              className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+              alt="..."
             />
-            <XAxis
-              dataKey="name"
-              axisLine={false}
-              tickLine={false}
-              tickMargin={10}
+          </div>
+
+          <div className="hidden duration-700 ease-in-out" data-carousel-item>
+            <img
+              src="/docs/images/carousel/carousel-5.svg"
+              className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+              alt="..."
             />
-            <YAxis axisLine={false} tickLine={false} tickMargin={10} />
-            <Tooltip content={<CustomTooltip />} cursor={false} />
-            <Line
-              activeDot={false}
-              type="monotone"
-              dataKey="expectedRevenue"
-              stroke="#242424"
-              strokeWidth="3"
-              dot={false}
-              strokeDasharray="8 8"
-            />
-            <Line
-              type="monotone"
-              dataKey="revenue"
-              stroke="url(#paint0_linear)"
-              strokeWidth="4"
-              dot={false}
-            />
-          </LineChart>
-        </ResponsiveContainer>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+          data-carousel-prev
+        >
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-300/30 hover:bg-gray-300/50 focus:bg-gray-300/70 focus:ring-4 focus:ring-gray-400/70 focus:outline-none">
+            <svg
+              className="w-4 h-4 text-gray-700/90"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M5 1 1 5l4 4"
+              />
+            </svg>
+            <span className="sr-only">Previous</span>
+          </span>
+        </button>
+        <button
+          type="button"
+          className="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+          data-carousel-next
+        >
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-300/30 hover:bg-gray-300/50 focus:bg-gray-300/70 focus:ring-4 focus:ring-gray-400/70 focus:outline-none">
+            <svg
+              className="w-4 h-4 text-gray-700/90"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="m1 9 4-4-4-4"
+              />
+            </svg>
+            <span className="sr-only">Next</span>
+          </span>
+        </button>
+      </div> */}
+
+
+<div data-hs-carousel='{
+    "loadingClasses": "opacity-0"
+  }' className="relative">
+  <div className="hs-carousel relative overflow-hidden w-full min-h-[350px] bg-white rounded-lg">
+    <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
+      <div className="hs-carousel-slide">
+        <div className="flex justify-center h-full bg-gray-100 p-6">
+          <span className="self-center text-4xl transition duration-700">
+
+
+          <div className="max-w-sm w-full lg:max-w-full lg:flex">
+  <div className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style={{backgroundImage: `url('/img/card-left.jpg')`}} title="Woman holding a mug">
+  </div>
+  <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+    <div className="mb-8">
+      <p className="text-sm text-gray-600 flex items-center">
+        <svg className="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
+        </svg>
+        Members only
+      </p>
+      <div className="text-gray-900 font-bold text-xl mb-2">Can coffee make you a better developer?</div>
+      <p className="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
+    </div>
+    <div className="flex items-center">
+      <img className="w-10 h-10 rounded-full mr-4" src="/img/jonathan.jpg" alt="Avatar of Jonathan Reinink"/>
+      <div className="text-sm">
+        <p className="text-gray-900 leading-none">Jonathan Reinink</p>
+        <p className="text-gray-600">Aug 18</p>
       </div>
+    </div>
+  </div>
+</div>
+
+
+          </span>
+        </div>
+      </div>
+      <div className="hs-carousel-slide">
+        <div className="flex justify-center h-full bg-gray-200 p-6">
+          <span className="self-center text-4xl transition duration-700">Second slide</span>
+        </div>
+      </div>
+      <div className="hs-carousel-slide">
+        <div className="flex justify-center h-full bg-gray-300 p-6">
+          <span className="self-center text-4xl transition duration-700">Third slide</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" className="hs-carousel-prev hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/[.1]">
+    <span className="text-2xl" aria-hidden="true">
+      <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+      </svg>
+    </span>
+    <span className="sr-only">Previous</span>
+  </button>
+  <button type="button" className="hs-carousel-next hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/[.1]">
+    <span className="sr-only">Next</span>
+    <span className="text-2xl" aria-hidden="true">
+      <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+      </svg>
+    </span>
+  </button>
+</div>
+
+
+
     </div>
   );
 }
@@ -561,7 +767,7 @@ function TrendingPosts() {
           <div className="">{`$${value.toLocaleString()}`}</div>
           <Icon
             path={
-              rise ? 'res-react-dash-country-up' : 'res-react-dash-country-down'
+              rise ? "res-react-dash-country-up" : "res-react-dash-country-down"
             }
             className="w-4 h-4 mx-3"
           />
@@ -580,7 +786,7 @@ function Segmentation() {
   return (
     <div className="p-4 h-full">
       <div className="flex justify-between items-center">
-        <div className="text-white font-bold">Segmentation</div>
+        <div className="text-white font-bold">Upcoming Events</div>
 
         <Icon path="res-react-dash-options" className="w-2 h-2" />
       </div>
@@ -608,8 +814,11 @@ function Segmentation() {
                 background: c3,
               }}
             >
-              {c1 === 'Other' && (
-                <img src="https://assets.codepen.io/3685267/res-react-dash-user-card.svg" alt="" />
+              {c1 === "Other" && (
+                <img
+                  src="https://assets.codepen.io/3685267/res-react-dash-user-card.svg"
+                  alt=""
+                />
               )}
             </div>
           </div>
@@ -633,7 +842,9 @@ function Satisfication() {
   return (
     <div className="p-4 h-full">
       <div className="flex justify-between items-center">
-        <div className="text-white font-bold">Satisfication</div>
+        <div className="text-white font-bold">
+          Nearby Business Recommendations
+        </div>
         <Icon path="res-react-dash-options" className="w-2 h-2" />
       </div>
       <div className="mt-3">From all projects</div>
@@ -664,10 +875,10 @@ function Satisfication() {
 
           <animated.circle
             cx={dashOffset.interpolate(
-              (x) => 350 + 250 * Math.cos(map(x, 785.4, 0, pi, tau)),
+              (x) => 350 + 250 * Math.cos(map(x, 785.4, 0, pi, tau))
             )}
             cy={dashOffset.interpolate(
-              (x) => 350 + 250 * Math.sin(map(x, 785.4, 0, pi, tau)),
+              (x) => 350 + 250 * Math.sin(map(x, 785.4, 0, pi, tau))
             )}
             r="12"
             fill="#fff"
@@ -798,26 +1009,26 @@ function Satisfication() {
       </div>
 
       <div className="flex justify-center">
-        <div className="flex justify-between mt-2" style={{ width: '300px' }}>
-          <div className="" style={{ width: '50px', paddingLeft: '16px' }}>
+        <div className="flex justify-between mt-2" style={{ width: "300px" }}>
+          <div className="" style={{ width: "50px", paddingLeft: "16px" }}>
             0%
           </div>
           <div
             className=""
             style={{
-              width: '150px',
-              textAlign: 'center',
+              width: "150px",
+              textAlign: "center",
             }}
           >
             <div
               className="font-bold"
-              style={{ color: '#2f49d1', fontSize: '18px' }}
+              style={{ color: "#2f49d1", fontSize: "18px" }}
             >
               97.78%
             </div>
             <div className="">Based on Likes</div>
           </div>
-          <div className="" style={{ width: '50px' }}>
+          <div className="" style={{ width: "50px" }}>
             100%
           </div>
         </div>
@@ -833,16 +1044,16 @@ function AddComponent() {
       <div
         className="flex flex-col items-center"
         style={{
-          transform: 'translate(0, -40px)',
+          transform: "translate(0, -40px)",
         }}
       >
         <div
           className=""
           style={{
-            background: '#414455',
-            width: '80px',
-            height: '80px',
-            borderRadius: '999px',
+            background: "#414455",
+            width: "80px",
+            height: "80px",
+            borderRadius: "999px",
           }}
         >
           <img
@@ -859,11 +1070,11 @@ function AddComponent() {
         <div
           className="flex items-center p-3 mt-3"
           style={{
-            background: '#2f49d1',
-            borderRadius: '15px',
-            padding: '8px 16px',
-            justifyContent: 'center',
-            color: 'white',
+            background: "#2f49d1",
+            borderRadius: "15px",
+            padding: "8px 16px",
+            justifyContent: "center",
+            color: "white",
           }}
         >
           <Icon path="res-react-dash-add-component" className="w-5 h-5" />
@@ -871,9 +1082,9 @@ function AddComponent() {
           <div
             className="ml-2"
             style={{
-              background: '#4964ed',
-              borderRadius: '15px',
-              padding: '4px 8px 4px 8px',
+              background: "#4964ed",
+              borderRadius: "15px",
+              padding: "4px 8px 4px 8px",
             }}
           >
             129
@@ -948,7 +1159,7 @@ function SidebarIcons({ id }) {
   );
 }
 
-function Icon({ path = 'options', className = 'w-4 h-4' }) {
+function Icon({ path = "options", className = "w-4 h-4" }) {
   return (
     <img
       src={`https://assets.codepen.io/3685267/${path}.svg`}
@@ -960,8 +1171,8 @@ function Icon({ path = 'options', className = 'w-4 h-4' }) {
 
 function IconButton({
   onClick = () => {},
-  icon = 'options',
-  className = 'w-4 h-4',
+  icon = "options",
+  className = "w-4 h-4",
 }) {
   return (
     <button onClick={onClick} type="button" className={className}>
@@ -974,14 +1185,8 @@ function IconButton({
   );
 }
 
-function Image({ path = '1', className = 'w-4 h-4' }) {
-  return (
-    <img
-      src={`https://assets.codepen.io/3685267/${path}.jpg`}
-      alt=""
-      className={clsx(className, 'rounded-full')}
-    />
-  );
+function Image({ url, className = "w-4 h-4" }) {
+  return <img src={url} alt="" className={clsx(className, "rounded-full")} />;
 }
 
-export default Dashboard
+export default Dashboard;
