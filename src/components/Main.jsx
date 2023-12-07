@@ -1,5 +1,6 @@
 import React from "react";
-import { Card, Title, Text, Badge, Button } from "@mantine/core";
+import { Card, Title, Text, Badge,
+Button } from "@mantine/core";
 
 const CustomCard = ({ title, text, views, imageUrl }) => {
   const handleLikeClick = () => {
