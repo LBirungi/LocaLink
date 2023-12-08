@@ -1,21 +1,12 @@
 import React from "react";
 import "../App.css";
 import { useSpring, animated, config } from "react-spring";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
 
 import clsx from "https://cdn.skypack.dev/clsx@1.1.1";
 const { useState } = React;
 
-const map = (views, sMin, sMax, dMin, dMax) => {
-  return dMin + ((views - sMin) / (sMax - sMin)) * (dMax - dMin);
+const map = (Members, sMin, sMax, dMin, dMax) => {
+  return dMin + ((Members - sMin) / (sMax - sMin)) * (dMax - dMin);
 };
 const pi = Math.PI;
 const tau = 2 * pi;
@@ -36,7 +27,7 @@ const employeeData = [
     name: "Ronnie Kagulire",
     username: "@RonnieKagulire",
     rise: false,
-    location: "Bwaise",
+    location: "Katabi",
     url: "/Ronald.png",
     lastSeen: "3 days ago",
   },
@@ -46,17 +37,31 @@ const employeeData = [
     name: "Johnson Byaruhanga",
     username: "@JohnsonByaruhanga",
     rise: true,
-    location: "Nabweru",
+    location: "Seeta",
     url: "/Johnson.png",
     lastSeen: "20 days ago",
   },
 ];
 
+const items = [
+  {
+    image: "/Lillian.jpeg",
+    title: "Card 1",
+    description: "Description for card 1.",
+  },
+  {
+    image: "/plumber.jpg",
+    title: "Card 2",
+    description: "Description for card 2.",
+  },
+  // ... more items
+];
+
 const Countrydata = [
-  { name: "Flooded Roads",  views: 2190, id: 1 },
-  { name: "New year Events",views: 1910, id: 2 },
-  { name: "Thieves caught",  views: 920, id: 3 },
-  { name: "Christmas Rush", views: 812, id: 4 },
+  { name: "Makindye", Members: 31190, id: 1, join: true },
+  { name: "Nateete", Members: 11910, id: 2 },
+  { name: "Najjera", Members: 1920, id: 3 },
+  { name: "Muyenga", Members: 1812, id: 4 },
 ];
 const segmentationData = [
   { c1: "Not Specified", c2: "800", c3: "#363636", color: "#535353" },
@@ -67,38 +72,24 @@ const segmentationData = [
 
 const sidebarItems = [
   [
-    { id: "0", title: "Dashboard", notifications: false },
-    { id: "1", title: "Overview", notifications: false },
-    { id: "2", title: "Chat", notifications: 6 },
-    { id: "3", title: "Team", notifications: false },
+    { id: "0", title: "Dashboard", dashboard: false },
+    { id: "1", title: "Message", dashboard: 7 },
+    { id: "2", title: "Chat", dashboard: 9 },
+    { id: "3", title: "Group", dashboard: true },
+  ],
+
+  [
+    { id: "4", title: "Dashboard", dashboard: false },
+    { id: "5", title: "Message", dashboard: 8 },
+    { id: "6", title: "Chat", dashboard: 6 },
+    { id: "7", title: "Group", dashboard: true },
   ],
   [
-    { id: "4", title: "Tasks", notifications: false },
-    { id: "5", title: "Reports", notifications: false },
-    { id: "6", title: "Settings", notifications: false },
+    { id: "8", title: "Tasks", dashboard: false },
+    { id: "9", title: "Reports", dashboard: false },
+    { id: "10", title: "Settings", dashboard: false },
   ],
 ];
-
-const graphData = [
-  "Nov",
-  "Dec",
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "June",
-  "July",
-].map((i) => {
-  const revenue = 500 + Math.random() * 2000;
-  const expectedRevenue = Math.max(revenue + (Math.random() - 0.5) * 2000, 0);
-  return {
-    name: i,
-    revenue,
-    expectedRevenue,
-    sales: Math.floor(Math.random() * 500),
-  };
-});
 
 const Dashboard = () => {
   const [showSidebar, onSetShowSidebar] = useState(false);
@@ -149,20 +140,7 @@ function Sidebar({ onSidebarHide, showSidebar }) {
         </div>
       </div>
       <div className="flex-grow overflow-x-hidden overflow-y-auto flex flex-col">
-        <div className="w-full p-3 h-24 sm:h-20 xl:h-24 hidden sm:block flex-shrink-0">
-          <div className="bg-sidebar-card-top rounded-xl w-full h-full flex items-center justify-start sm:justify-center xl:justify-start px-3 sm:px-0 xl:px-3">
-            <Icon path="res-react-dash-sidebar-card" className="w-9 h-9 " />
-            <div className="block sm:hidden xl:block ml-3">
-              <div className="text-sm font-bold text-white">Sales House</div>
-              <div className="text-sm">General Item</div>
-            </div>
-            <div className="block sm:hidden xl:block flex-grow" />
-            <Icon
-              path="res-react-dash-sidebar-card-select"
-              className="block sm:hidden xl:block w-5 h-5"
-            />
-          </div>
-        </div>
+        <div className="w-full p-2 h-14 sm:h-10 xl:h-5 hidden sm:block flex-shrink-0"></div>
         {sidebarItems[0].map((i) => (
           <MenuItem
             key={i.id}
@@ -182,84 +160,40 @@ function Sidebar({ onSidebarHide, showSidebar }) {
             selected={selected}
           />
         ))}
-        <div className="flex-grow" />
-        <div className="w-full p-3 h-28 hidden sm:block sm:h-20 xl:h-32">
-          <div
-            className="rounded-xl w-full h-full px-3 sm:px-0 xl:px-3 overflow-hidden"
-            style={{
-              backgroundImage:
-                "url('https://assets.codepen.io/3685267/res-react-dash-usage-card.svg')",
-            }}
-          >
-            <div className="block sm:hidden xl:block pt-3">
-              <div className="font-bold text-gray-300 text-sm">Used Space</div>
-              <div className="text-gray-500 text-xs">
-                Admin updated 09:12 am November 08,2020
-              </div>
-              <animated.div className="text-right text-gray-400 text-xs">
-                {precentage.interpolate((i) => `${Math.round(i)}%`)}
-              </animated.div>
-              <div className="w-full text-gray-300">
-                <svg
-                  viewBox="0 0 100 11"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <line
-                    x1="5"
-                    y1="5.25"
-                    x2="95"
-                    y2="5.25"
-                    stroke="#3C3C3C"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                  />
-                  <animated.line
-                    x1="5"
-                    y1="5.25"
-                    x2={indicatorWidth}
-                    y2="5.25"
-                    stroke="currentColor"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </div>
-            </div>
 
-            <div className="hidden sm:block xl:hidden ">
-              <svg
-                width="56"
-                height="56"
-                viewBox="0 0 56 56"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect width="56" height="56" fill="#2C2C2D" />
-                <path
-                  d="M 28 28 m 0, -18 a 18 18 0 0 1 0 36 a 18 18 0 0 1 0 -36"
-                  stroke="#3C3C3C"
-                  strokeWidth="6"
-                />
-                <animated.path
-                  d="M 28 28 m 0, -18 a 18 18 0 0 1 0 36 a 18 18 0 0 1 0 -36"
-                  stroke="#fff"
-                  strokeLinecap="round"
-                  strokeDasharray="113.113"
-                  strokeDashoffset={dashOffset}
-                  strokeWidth="6"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
+<button
+  type="button"
+  className="mt-10 py-1 inline-flex px-2 flex items-center font-semibold justify-center gap-x-2 text-md font-semibold rounded-lg border border-transparent text-white bg-gray-300 hover:bg-blue-400 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+>
+
+  Post
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="icon icon-tabler icon-tabler-square-rounded-plus text-blue-600"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    strokeWidth="2"
+    stroke="currentColor"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+    <path d="M15 12h-6" />
+    <path d="M12 9v6" />
+  </svg>
+</button>
+
+        <div className="flex-grow" />
       </div>
 
       <div className="flex-shrink-0 overflow-hidden p-2">
         <div className="flex items-center h-full sm:justify-center xl:justify-start p-2 sidebar-separator-bottom">
-          <Image url="mock_faces_8" className="w-10 h-10" />
+          <Image url="/Grace.jpg" className="w-10 h-10" />
           <div className="block sm:hidden xl:block ml-2 font-bold ">
-            Jerry Wilson
+            Grace Mukisa
           </div>
           <div className="flex-grow block sm:hidden xl:block" />
           <Icon
@@ -271,7 +205,7 @@ function Sidebar({ onSidebarHide, showSidebar }) {
     </div>
   );
 }
-function MenuItem({ item: { id, title, notifications }, onClick, selected }) {
+function MenuItem({ item: { id, title, dashboard }, onClick, selected }) {
   return (
     <div
       className={clsx(
@@ -283,9 +217,9 @@ function MenuItem({ item: { id, title, notifications }, onClick, selected }) {
       <SidebarIcons id={id} />
       <div className="block sm:hidden xl:block ml-2">{title}</div>
       <div className="block sm:hidden xl:block flex-grow" />
-      {notifications && (
+      {dashboard && (
         <div className="flex sm:hidden xl:flex bg-pink-600  w-5 h-5 flex items-center justify-center rounded-full mr-2">
-          <div className="text-white text-sm">{notifications}</div>
+          <div className="text-white text-sm">{dashboard}</div>
         </div>
       )}
     </div>
@@ -349,28 +283,29 @@ function Content({ onSidebarHide }) {
           )
         )}
 
-        <div className="w-full p-2 lg:w-2/3">
+        <div className="w-full p-2 lg:w-1/2">
           <div className="rounded-lg bg-card sm:h-80 h-60">
             <Graph />
           </div>
         </div>
-        <div className="w-full p-2 lg:w-1/3">
+
+        <div className="w-full p-2 lg:w-1/2">
           <div className="rounded-lg bg-card h-80">
-            <TrendingPosts />
+            <NearbyCommunities />
           </div>
         </div>
 
-        <div className="w-full p-2 lg:w-1/3">
+        <div className="w-full p-2 lg:w-3/3">
           <div className="rounded-lg bg-card h-80">
             <Segmentation />
           </div>
         </div>
-        <div className="w-full p-2 lg:w-1/3">
+        <div className="w-full p-2 lg:w-3/3">
           <div className="rounded-lg bg-card h-80">
             <Satisfication />
           </div>
         </div>
-        <div className="w-full p-2 lg:w-1/3">
+        <div className="w-full p-2 lg:w-3/3">
           <div className="rounded-lg bg-card overflow-hidden h-80">
             <AddComponent />
           </div>
@@ -435,6 +370,82 @@ function NameCard({ name, username, rise, location, url, lastSeen }) {
     </div>
   );
 }
+
+const Carousel = ({ items }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const goToPrevious = () => {
+    setActiveIndex((prevIndex) =>
+      prevIndex === 0 ? items.length - 1 : prevIndex - 1
+    );
+  };
+
+  const goToNext = () => {
+    setActiveIndex((prevIndex) =>
+      prevIndex === items.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  return (
+    <div className="relative w-full pt-4">
+      <div className="overflow-hidden w-full ">
+        <div
+          className="flex transition-transform duration-700"
+          style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+        >
+          {items.map((item, index) => (
+            <div key={index} className="flex-none w-full ">
+              <div className="flex items-center bg-white shadow-lg rounded-lg overflow-hidden h-full">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-1/3 h-full object-cover"
+                />{" "}
+                {/* The image fills half the width and the full height of the card */}
+                <div className="w-2/3 p-4 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-xl font-semibold">{item.title}</h3>
+                    <p className="text-gray-700">{item.description}</p>
+                  </div>
+                  <div className="flex items-center mt-4">
+                    <div className="flex-shrink-0">
+                      <a href="#" className="block relative">
+                        <img
+                          alt="profile"
+                          src={item.authorImage}
+                          className="mx-auto object-cover rounded-full h-10 w-10 "
+                        />
+                      </a>
+                    </div>
+                    <div className="ml-3">
+                      <p className="text-sm font-medium leading-none">
+                        {item.authorName}
+                      </p>
+                      <p className="text-sm text-gray-600">{item.date}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <button
+        onClick={goToPrevious}
+        className="absolute top-1/2 left-0 z-10 p-2 text-white bg-black bg-opacity-50"
+      >
+        Prev
+      </button>
+      <button
+        onClick={goToNext}
+        className="absolute top-1/2 right-0 z-10 p-2 text-white bg-black bg-opacity-50"
+      >
+        Next
+      </button>
+    </div>
+  );
+};
+
 function Graph() {
   const CustomTooltip = () => (
     <div className="rounded-xl overflow-hidden tooltip-head">
@@ -457,360 +468,37 @@ function Graph() {
 
           <Icon path="res-react-dash-graph-range" className="w-4 h-4" />
           <div className="ml-2">Last 9 Months</div>
-          <div className="ml-6 w-5 h-5 flex justify-center items-center rounded-full icon-background">
-            ?
-          </div>
         </div>
         <div className="font-bold ml-5">Nov - July</div>
       </div>
-
-      {/* <div
-        id="controls-carousel"
-        className="relative w-full"
-        data-carousel="static"
-      >
-        <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
-          <div className="duration-700 ease-in-out" data-carousel-item>
-            <div className="max-w-sm w-full lg:max-w-full lg:flex">
-              <div
-                className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-                style={{ backgroundImage: "url('/immunisation.webp')" }}
-                title="Immunisation"
-              ></div>
-              <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                <div className="mb-8">
-                  <p className="text-sm text-gray-600 flex items-center">
-                    <svg
-                      className="fill-current text-gray-500 w-3 h-3 mr-2"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
-                    </svg>
-                    Members only
-                  </p>
-                  <div className="text-gray-900 font-bold text-xl mb-2">
-                    Can coffee make you a better developer?
-                  </div>
-                  <p className="text-gray-700 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Voluptatibus quia, nulla! Maiores et perferendis eaque,
-                    exercitationem praesentium nihil.
-                  </p>
-                </div>
-                <div className="flex items-center">
-                  <img
-                    className="w-10 h-10 rounded-full mr-4"
-                    src="/public/immunisation.webp"
-                  />
-                  <div className="text-sm">
-                    <p className="text-gray-900 leading-none">
-                      Jonathan Reinink
-                    </p>
-                    <p className="text-gray-600">Aug 18</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          
-          <div
-            className="hidden duration-700 ease-in-out"
-            data-carousel-item="active"
-          >
-            <div className="max-w-sm w-full lg:max-w-full lg:flex">
-              <div
-                className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-                style={{ backgroundImage: "url('/immunisation.webp')" }}
-                title="Immunisation"
-              ></div>
-              <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                <div className="mb-8">
-                  <p className="text-sm text-gray-600 flex items-center">
-                    <svg
-                      className="fill-current text-gray-500 w-3 h-3 mr-2"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
-                    </svg>
-                    Members only
-                  </p>
-                  <div className="text-gray-900 font-bold text-xl mb-2">
-                    Can coffee make you a better developer?
-                  </div>
-                  <p className="text-gray-700 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Voluptatibus quia, nulla! Maiores et perferendis eaque,
-                    exercitationem praesentium nihil.
-                  </p>
-                </div>
-                <div className="flex items-center">
-                  <img
-                    className="w-10 h-10 rounded-full mr-4"
-                    src="/public/immunisation.webp"
-                  />
-                  <div className="text-sm">
-                    <p className="text-gray-900 leading-none">
-                      Jonathan Reinink
-                    </p>
-                    <p className="text-gray-600">Aug 18</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="hidden duration-700 ease-in-out" data-carousel-item>
-            <div className="max-w-sm w-full lg:max-w-full lg:flex">
-              <div
-                className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-                style={{ backgroundImage: "url('/immunisation.webp')" }}
-                title="Immunisation"
-              ></div>
-              <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                <div className="mb-8">
-                  <p className="text-sm text-gray-600 flex items-center">
-                    <svg
-                      className="fill-current text-gray-500 w-3 h-3 mr-2"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
-                    </svg>
-                    Members only
-                  </p>
-                  <div className="text-gray-900 font-bold text-xl mb-2">
-                    Can coffee make you a better developer?
-                  </div>
-                  <p className="text-gray-700 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Voluptatibus quia, nulla! Maiores et perferendis eaque,
-                    exercitationem praesentium nihil.
-                  </p>
-                </div>
-                <div className="flex items-center">
-                  <img
-                    className="w-10 h-10 rounded-full mr-4"
-                    src="/santa.jpeg"
-                  />
-                  <div className="text-sm">
-                    <p className="text-gray-900 leading-none">
-                      Jonathan Reinink
-                    </p>
-                    <p className="text-gray-600">Aug 18</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="hidden duration-700 ease-in-out" data-carousel-item>
-            <img
-              src="/docs/images/carousel/carousel-4.svg"
-              className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-              alt="..."
-            />
-          </div>
-
-          <div className="hidden duration-700 ease-in-out" data-carousel-item>
-            <img
-              src="/docs/images/carousel/carousel-5.svg"
-              className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-              alt="..."
-            />
-          </div>
-        </div>
-
-        <button
-          type="button"
-          className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-          data-carousel-prev
-        >
-          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-300/30 hover:bg-gray-300/50 focus:bg-gray-300/70 focus:ring-4 focus:ring-gray-400/70 focus:outline-none">
-            <svg
-              className="w-4 h-4 text-gray-700/90"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 6 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 1 1 5l4 4"
-              />
-            </svg>
-            <span className="sr-only">Previous</span>
-          </span>
-        </button>
-        <button
-          type="button"
-          className="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-          data-carousel-next
-        >
-          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-300/30 hover:bg-gray-300/50 focus:bg-gray-300/70 focus:ring-4 focus:ring-gray-400/70 focus:outline-none">
-            <svg
-              className="w-4 h-4 text-gray-700/90"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 6 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m1 9 4-4-4-4"
-              />
-            </svg>
-            <span className="sr-only">Next</span>
-          </span>
-        </button>
-      </div> */}
-
-      <div
-        data-hs-carousel='{
-    "loadingClasses": "opacity-0"
-  }'
-        className="relative"
-      >
-        <div className="hs-carousel relative w-full min-h-[350px] bg-white rounded-lg overflow-hidden">
-          <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 ">
-            <div className="hs-carousel-slide">
-              <div className="flex justify-center h-full bg-gray-300 p-6">
-                <span className="self-center text-4xl transition duration-700">
-                  <div className="h-60 max-w-sm w-full lg:max-w-full lg:flex">
-                    <div
-                      className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-                      style={{ backgroundImage: `url('/immunisation.webp')` }}
-                      title="Pregnant Woman"
-                    ></div>
-                    <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal w-full">
-                      <div className="mb-2 border-red">
-                        <p className="py-4 text-sm text-gray-600 flex items-center">
-                          Community Update
-                        </p>
-                        <div className="bg-blue-300 text-gray-900 font-bold text-xl mb-2">
-                          Can coffee make you a better developer?
-                        </div>
-                        <p className=" bg-gray-200 text-gray-700 text-base">
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Voluptatibus quia, nulla! Maiores et perferendis
-                          eaque, exercitationem praesentium nihil.
-                        </p>
-                      </div>
-                      <div className="flex items-center">
-                        <img
-                          className="w-10 h-10 rounded-full mr-4"
-                          src="/img/jonathan.jpg"
-                          alt="Avatar of Jonathan Reinink"
-                        />
-                        <div className="text-sm">
-                          <p className="text-gray-900 leading-none">
-                            Jonathan Reinink
-                          </p>
-                          <p className="text-gray-600">Aug 18</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </span>
-              </div>
-            </div>
-            <div className="hs-carousel-slide">
-              <div className="flex justify-center h-full bg-gray-400 p-6">
-                <span className="self-center text-4xl transition duration-700">
-                  Second slide
-                </span>
-              </div>
-            </div>
-            <div className="hs-carousel-slide">
-              <div className="flex justify-center h-full bg-gray-500 p-6">
-                <span className="self-center text-4xl transition duration-700">
-                  Third slide
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <button
-          type="button"
-          className="hs-carousel-prev hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/[.1]"
-        >
-          <span className="text-2xl" aria-hidden="true">
-            <svg
-              className="w-4 h-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fillRule="evenodd"
-                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
-              />
-            </svg>
-          </span>
-          <span className="sr-only">Previous</span>
-        </button>
-        <button
-          type="button"
-          className="hs-carousel-next hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/[.1]"
-        >
-          <span className="sr-only">Next</span>
-          <span className="text-2xl" aria-hidden="true">
-            <svg
-              className="w-4 h-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-              />
-            </svg>
-          </span>
-        </button>
-      </div>
+      <Carousel items={items} />
     </div>
   );
 }
 
-function TrendingPosts() {
+function NearbyCommunities() {
   return (
     <div className="flex p-4 flex-col h-full">
       <div className="flex justify-between items-center">
-        <div className="text-white font-bold">Trending Posts</div>
+        <div className="text-white font-bold">Communities</div>
         <Icon path="res-react-dash-plus" className="w-5 h-5" />
       </div>
-      <div className="">In your Area</div>
-      {Countrydata.map(({ name, views, id }) => (
+      <div className="">Areas</div>
+      {Countrydata.map(({ name, Members, id, join }) => (
         <div className="flex items-center mt-3" key={id}>
           <div className="">{id}</div>
 
-          
           <div className="ml-2">{name}</div>
           <div className="flex-grow" />
-          <div className="">views
-          <div className="">{`${views.toLocaleString()}`}</div>
+          <div className="">
+            Members
+            <div className="">{`${Members.toLocaleString()}`}</div>
           </div>
-          
-          
         </div>
       ))}
       <div className="flex-grow" />
       <div className="flex justify-center">
-        <div className="">Check All</div>
+        <div className="">See More</div>
       </div>
     </div>
   );
