@@ -1,61 +1,59 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebook,
-  faTwitter,
-  faLinkedin,
-  faGithub,
-  faWhatsapp,
-} from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { Bold } from "tabler-icons-react";
+import React, { useState } from "react";
+import { IconHome,IconTrash,IconMenu2,IconSettingsCog,IconMap } from '@tabler/icons-react';
+import { BellRinging,Briefcase,BrandWechat,} from 'tabler-icons-react';
 
-function Footeropp() {
+function Navopp() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
-    <>
-      <footer>
-        <div
-          style={{
-            backgroundColor: "#000000",
-            color: "#fff",
-            padding: "20px",
-            textAlign: "center",
-            font: "Bold",
-          }}
-        >
-          Enjoy your Experience with LocaLink
-          <section id="contact">
-            <div id="contact-title">
-              <h1>Connect With Me</h1>
+    <nav className="bg-black">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center">
+            <div className="flex-shrink-0">
+              <span className="text-white text-lg font-bold">Localink</span>
             </div>
-            <div id="contacticons">
-              <a href="#" className="fa fa-facebook">
-                <FontAwesomeIcon icon={faFacebook} />
-              </a>
-              <a href="#" className="fa fa-twitter">
-                <FontAwesomeIcon icon={faTwitter} />
-              </a>
-              <a href="#" className="fa fa-linkedin-square">
-                <FontAwesomeIcon icon={faLinkedin} />
-              </a>
-              <a href="#" className="fa fa-github">
-                <FontAwesomeIcon icon={faGithub} />
-              </a>
-              <a href="#" className="fa fa-whatsapp">
-                <FontAwesomeIcon icon={faWhatsapp} />
-              </a>
-              <a href="#" className="glyphicon glyphicon-envelope">
-                <FontAwesomeIcon icon={faEnvelope} />
-              </a>
+          </div>
+          <div className="flex items-center">
+            <div className="hidden sm:block">
+              <button
+                onClick={toggleMenu}
+                className="inline-block px-3 py-2 text-white hover:text-gray-300 focus:outline-none"
+              >
+                Toggle Menu
+              </button>
+              {menuOpen && (
+                <div className="absolute mt-2 w-40 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                  <div className="py-1">
+                    <MenuItem icon={<IconHome size={20} strokeWidth={1} color="black" />} text="Home" />
+                    <MenuItem icon={<IconMap size={20} strokeWidth={1} color="black" />} text="Discover" />
+                    <MenuItem icon={<Briefcase size={20} strokeWidth={1} color="black" />} text="Opportunities" />
+                    <MenuItem icon={<BellRinging size={20} strokeWidth={1} color="black" />} text="Notifications" />
+                    <MenuItem icon={<IconSettingsCog size={20} strokeWidth={1} color="black" />} text="Help/FAQs" />
+                    <MenuItem icon={<IconTrash size={20} strokeWidth={1} color="black" />} text="Delete my account" color="red" />
+                  </div>
+                </div>
+              )}
             </div>
-            <div>
-              <h4>Copyright ©2023, Localink</h4>
-            </div>
-          </section>
+          </div>
         </div>
-      </footer>
-    </>
+      </div>
+    </nav>
   );
 }
-export default Footeropp;
-g
+
+// MenuItem component to render individual items in the menu
+const MenuItem = ({ icon, text, color }) => {
+  return (
+    <button className={`block w-full text-left px-4 py-2 text-sm text-gray-800 hover:bg-gray-200 ${color ? `text-${color}-500` : ''}`}>
+      {icon}
+      {text}
+    </button>
+  );
+};
+
+export default Navopp;
