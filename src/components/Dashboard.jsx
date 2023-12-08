@@ -520,6 +520,30 @@ function NearbyCommunities() {
   );
 }
 
+function UpcomingEvents(){
+  return(
+   <div className="flex p-4 flex-col h-full justify-between ">
+    <div className="">Areas</div>
+    {Countrydata.map(({ name, Members, id, join }) => (
+      <div className="flex items-center mt-3" key={id}>
+        <div className="">{id}</div>
+
+        <div className="ml-2">{name}</div>
+        <div className="flex-grow" />
+        <div className="">
+          Members
+          <div className="">{`${Members.toLocaleString()}`}</div>
+        </div>
+      </div>
+    ))}
+    <div className="flex-grow" />
+    <div className="flex justify-center">
+      <div className="">See More</div>
+    </div>
+  </div>
+  );
+}
+
 function Segmentation() {
   return (
     <div className="p-4 h-full">
@@ -803,7 +827,9 @@ function AddComponent() {
         <div className="text-white font-bold mt-3">
         Upcoming Events
         </div>
+       
       </div>
+      <UpcomingEvents/>
     </div>
   );
 }
