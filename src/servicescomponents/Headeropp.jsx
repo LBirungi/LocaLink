@@ -4,7 +4,7 @@ import Cardsopp from "./Cardsopp";
 
 function Headeropp() {
   const headerStyle = {
-    backgroundImage: "url('/Landing.jpg')",
+    //backgroundImage: "url('/",
     backgroundSize: "cover", // Optional: Adjust the background size
     backgroundPosition: "center center", // Optional: Adjust the background position
     minHeight: "300px", // Set a minimum height for the header
