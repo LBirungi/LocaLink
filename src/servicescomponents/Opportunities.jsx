@@ -7,7 +7,6 @@ import Asideopp from './Asideopp';
 import Cardsopp from './Cardsopp';
 
 
-
 function Opportunities(){
     const [opened, { toggle }] = useDisclosure();
 
