@@ -673,78 +673,115 @@ function Graph() {
         </button>
       </div> */}
 
-
-<div data-hs-carousel='{
+      <div
+        data-hs-carousel='{
     "loadingClasses": "opacity-0"
-  }' className="relative">
-  <div className="hs-carousel relative overflow-hidden w-full min-h-[350px] bg-white rounded-lg">
-    <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
-      <div className="hs-carousel-slide">
-        <div className="flex justify-center h-full bg-gray-100 p-6">
-          <span className="self-center text-4xl transition duration-700">
+  }'
+        className="relative"
+      >
+        <div className="hs-carousel relative w-full min-h-[350px] bg-white rounded-lg overflow-hidden">
+          <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 ">
+            <div className="hs-carousel-slide">
+              <div className="flex justify-center h-full bg-gray-300 p-6">
+                <span className="self-center text-4xl transition duration-700">
+                  <div className="h-60 max-w-sm w-full lg:max-w-full lg:flex">
+                    <div
+                      className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+                      style={{ backgroundImage: `url('/immunisation.webp')` }}
+                      title="Pregnant Woman"
+                    ></div>
+                    <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal w-full">
+                      <div className="mb-2 border-red">
+                        <p className="py-4 text-sm text-gray-600 flex items-center">
+                          Community Update
+                        </p>
+                        <div className="bg-blue-300 text-gray-900 font-bold text-xl mb-2">
+                          Can coffee make you a better developer?
+                        </div>
+                        <p className=" bg-gray-200 text-gray-700 text-base">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing
+                          elit. Voluptatibus quia, nulla! Maiores et perferendis
+                          eaque, exercitationem praesentium nihil.
+                        </p>
+                      </div>
+                      <div className="flex items-center">
+                        <img
+                          className="w-10 h-10 rounded-full mr-4"
+                          src="/img/jonathan.jpg"
+                          alt="Avatar of Jonathan Reinink"
+                        />
+                        <div className="text-sm">
+                          <p className="text-gray-900 leading-none">
+                            Jonathan Reinink
+                          </p>
+                          <p className="text-gray-600">Aug 18</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+              </div>
+            </div>
+            <div className="hs-carousel-slide">
+              <div className="flex justify-center h-full bg-gray-400 p-6">
+                <span className="self-center text-4xl transition duration-700">
+                  Second slide
+                </span>
+              </div>
+            </div>
+            <div className="hs-carousel-slide">
+              <div className="flex justify-center h-full bg-gray-500 p-6">
+                <span className="self-center text-4xl transition duration-700">
+                  Third slide
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-
-          <div className="max-w-sm w-full lg:max-w-full lg:flex">
-  <div className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style={{backgroundImage: `url('/img/card-left.jpg')`}} title="Woman holding a mug">
-  </div>
-  <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-    <div className="mb-8">
-      <p className="text-sm text-gray-600 flex items-center">
-        <svg className="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-          <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
-        </svg>
-        Members only
-      </p>
-      <div className="text-gray-900 font-bold text-xl mb-2">Can coffee make you a better developer?</div>
-      <p className="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
-    </div>
-    <div className="flex items-center">
-      <img className="w-10 h-10 rounded-full mr-4" src="/img/jonathan.jpg" alt="Avatar of Jonathan Reinink"/>
-      <div className="text-sm">
-        <p className="text-gray-900 leading-none">Jonathan Reinink</p>
-        <p className="text-gray-600">Aug 18</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
+        <button
+          type="button"
+          className="hs-carousel-prev hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/[.1]"
+        >
+          <span className="text-2xl" aria-hidden="true">
+            <svg
+              className="w-4 h-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fillRule="evenodd"
+                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+              />
+            </svg>
           </span>
-        </div>
+          <span className="sr-only">Previous</span>
+        </button>
+        <button
+          type="button"
+          className="hs-carousel-next hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/[.1]"
+        >
+          <span className="sr-only">Next</span>
+          <span className="text-2xl" aria-hidden="true">
+            <svg
+              className="w-4 h-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
+              />
+            </svg>
+          </span>
+        </button>
       </div>
-      <div className="hs-carousel-slide">
-        <div className="flex justify-center h-full bg-gray-200 p-6">
-          <span className="self-center text-4xl transition duration-700">Second slide</span>
-        </div>
-      </div>
-      <div className="hs-carousel-slide">
-        <div className="flex justify-center h-full bg-gray-300 p-6">
-          <span className="self-center text-4xl transition duration-700">Third slide</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <button type="button" className="hs-carousel-prev hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/[.1]">
-    <span className="text-2xl" aria-hidden="true">
-      <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-        <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-      </svg>
-    </span>
-    <span className="sr-only">Previous</span>
-  </button>
-  <button type="button" className="hs-carousel-next hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/[.1]">
-    <span className="sr-only">Next</span>
-    <span className="text-2xl" aria-hidden="true">
-      <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-        <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-      </svg>
-    </span>
-  </button>
-</div>
-
-
-
     </div>
   );
 }
