@@ -14,8 +14,8 @@ import {
 import clsx from "https://cdn.skypack.dev/clsx@1.1.1";
 const { useState } = React;
 
-const map = (value, sMin, sMax, dMin, dMax) => {
-  return dMin + ((value - sMin) / (sMax - sMin)) * (dMax - dMin);
+const map = (views, sMin, sMax, dMin, dMax) => {
+  return dMin + ((views - sMin) / (sMax - sMin)) * (dMax - dMin);
 };
 const pi = Math.PI;
 const tau = 2 * pi;
@@ -53,10 +53,10 @@ const employeeData = [
 ];
 
 const Countrydata = [
-  { name: "USA", rise: true, value: 21942.83, id: 1 },
-  { name: "Ireland", rise: false, value: 19710.0, id: 2 },
-  { name: "Ukraine", rise: false, value: 12320.3, id: 3 },
-  { name: "Sweden", rise: true, value: 9725.0, id: 4 },
+  { name: "Flooded Roads",  views: 2190, id: 1 },
+  { name: "New year Events",views: 1910, id: 2 },
+  { name: "Thieves caught",  views: 920, id: 3 },
+  { name: "Christmas Rush", views: 812, id: 4 },
 ];
 const segmentationData = [
   { c1: "Not Specified", c2: "800", c3: "#363636", color: "#535353" },
@@ -793,22 +793,19 @@ function TrendingPosts() {
         <div className="text-white font-bold">Trending Posts</div>
         <Icon path="res-react-dash-plus" className="w-5 h-5" />
       </div>
-      <div className="">favourites</div>
-      {Countrydata.map(({ name, rise, value, id }) => (
+      <div className="">In your Area</div>
+      {Countrydata.map(({ name, views, id }) => (
         <div className="flex items-center mt-3" key={id}>
           <div className="">{id}</div>
 
-          <Image path={`res-react-dash-flag-${id}`} className="ml-2 w-6 h-6" />
+          
           <div className="ml-2">{name}</div>
           <div className="flex-grow" />
-          <div className="">{`$${value.toLocaleString()}`}</div>
-          <Icon
-            path={
-              rise ? "res-react-dash-country-up" : "res-react-dash-country-down"
-            }
-            className="w-4 h-4 mx-3"
-          />
-          <Icon path="res-react-dash-options" className="w-2 h-2" />
+          <div className="">views
+          <div className="">{`${views.toLocaleString()}`}</div>
+          </div>
+          
+          
         </div>
       ))}
       <div className="flex-grow" />
