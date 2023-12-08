@@ -5,8 +5,8 @@ import { useSpring, animated, config } from "react-spring";
 import clsx from "https://cdn.skypack.dev/clsx@1.1.1";
 const { useState } = React;
 
-const map = (views, sMin, sMax, dMin, dMax) => {
-  return dMin + ((views - sMin) / (sMax - sMin)) * (dMax - dMin);
+const map = (Members, sMin, sMax, dMin, dMax) => {
+  return dMin + ((Members - sMin) / (sMax - sMin)) * (dMax - dMin);
 };
 const pi = Math.PI;
 const tau = 2 * pi;
@@ -27,7 +27,7 @@ const employeeData = [
     name: "Ronnie Kagulire",
     username: "@RonnieKagulire",
     rise: false,
-    location: "Bwaise",
+    location: "Katabi",
     url: "/Ronald.png",
     lastSeen: "3 days ago",
   },
@@ -37,17 +37,31 @@ const employeeData = [
     name: "Johnson Byaruhanga",
     username: "@JohnsonByaruhanga",
     rise: true,
-    location: "Nabweru",
+    location: "Seeta",
     url: "/Johnson.png",
     lastSeen: "20 days ago",
   },
 ];
 
+const items = [
+  {
+    image: "/Lillian.jpeg",
+    title: "Card 1",
+    description: "Description for card 1.",
+  },
+  {
+    image: "/plumber.jpg",
+    title: "Card 2",
+    description: "Description for card 2.",
+  },
+  // ... more items
+];
+
 const Countrydata = [
-  { name: "Flooded Roads",  views: 2190, id: 1 },
-  { name: "New year Events",views: 1910, id: 2 },
-  { name: "Thieves caught",  views: 920, id: 3 },
-  { name: "Christmas Rush", views: 812, id: 4 },
+  { name: "Makindye", Members: 31190, id: 1, join: true },
+  { name: "Nateete", Members: 11910, id: 2 },
+  { name: "Najjera", Members: 1920, id: 3 },
+  { name: "Muyenga", Members: 1812, id: 4 },
 ];
 const segmentationData = [
   { c1: "Not Specified", c2: "800", c3: "#363636", color: "#535353" },
@@ -58,15 +72,22 @@ const segmentationData = [
 
 const sidebarItems = [
   [
-    { id: "0", title: "Dashboard", notifications: false },
-    { id: "1", title: "Overview", notifications: false },
-    { id: "2", title: "Chat", notifications: 6 },
-    { id: "3", title: "Team", notifications: false },
+    { id: "0", title: "Dashboard", dashboard: false },
+    { id: "1", title: "Message", dashboard: 7 },
+    { id: "2", title: "Chat", dashboard: 9 },
+    { id: "3", title: "Group", dashboard: true },
+  ],
+
+  [
+    { id: "4", title: "Dashboard", dashboard: false },
+    { id: "5", title: "Message", dashboard: 8 },
+    { id: "6", title: "Chat", dashboard: 6 },
+    { id: "7", title: "Group", dashboard: true },
   ],
   [
-    { id: "4", title: "Tasks", notifications: false },
-    { id: "5", title: "Reports", notifications: false },
-    { id: "6", title: "Settings", notifications: false },
+    { id: "8", title: "Tasks", dashboard: false },
+    { id: "9", title: "Reports", dashboard: false },
+    { id: "10", title: "Settings", dashboard: false },
   ],
 ];
 
@@ -119,20 +140,7 @@ function Sidebar({ onSidebarHide, showSidebar }) {
         </div>
       </div>
       <div className="flex-grow overflow-x-hidden overflow-y-auto flex flex-col">
-        <div className="w-full p-3 h-24 sm:h-20 xl:h-24 hidden sm:block flex-shrink-0">
-          <div className="bg-sidebar-card-top rounded-xl w-full h-full flex items-center justify-start sm:justify-center xl:justify-start px-3 sm:px-0 xl:px-3">
-            <Icon path="res-react-dash-sidebar-card" className="w-9 h-9 " />
-            <div className="block sm:hidden xl:block ml-3">
-              <div className="text-sm font-bold text-white">Sales House</div>
-              <div className="text-sm">General Item</div>
-            </div>
-            <div className="block sm:hidden xl:block flex-grow" />
-            <Icon
-              path="res-react-dash-sidebar-card-select"
-              className="block sm:hidden xl:block w-5 h-5"
-            />
-          </div>
-        </div>
+        <div className="w-full p-2 h-14 sm:h-10 xl:h-5 hidden sm:block flex-shrink-0"></div>
         {sidebarItems[0].map((i) => (
           <MenuItem
             key={i.id}
@@ -152,84 +160,40 @@ function Sidebar({ onSidebarHide, showSidebar }) {
             selected={selected}
           />
         ))}
-        <div className="flex-grow" />
-        <div className="w-full p-3 h-28 hidden sm:block sm:h-20 xl:h-32">
-          <div
-            className="rounded-xl w-full h-full px-3 sm:px-0 xl:px-3 overflow-hidden"
-            style={{
-              backgroundImage:
-                "url('https://assets.codepen.io/3685267/res-react-dash-usage-card.svg')",
-            }}
-          >
-            <div className="block sm:hidden xl:block pt-3">
-              <div className="font-bold text-gray-300 text-sm">Used Space</div>
-              <div className="text-gray-500 text-xs">
-                Admin updated 09:12 am November 08,2020
-              </div>
-              <animated.div className="text-right text-gray-400 text-xs">
-                {precentage.interpolate((i) => `${Math.round(i)}%`)}
-              </animated.div>
-              <div className="w-full text-gray-300">
-                <svg
-                  viewBox="0 0 100 11"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <line
-                    x1="5"
-                    y1="5.25"
-                    x2="95"
-                    y2="5.25"
-                    stroke="#3C3C3C"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                  />
-                  <animated.line
-                    x1="5"
-                    y1="5.25"
-                    x2={indicatorWidth}
-                    y2="5.25"
-                    stroke="currentColor"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </div>
-            </div>
 
-            <div className="hidden sm:block xl:hidden ">
-              <svg
-                width="56"
-                height="56"
-                viewBox="0 0 56 56"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect width="56" height="56" fill="#2C2C2D" />
-                <path
-                  d="M 28 28 m 0, -18 a 18 18 0 0 1 0 36 a 18 18 0 0 1 0 -36"
-                  stroke="#3C3C3C"
-                  strokeWidth="6"
-                />
-                <animated.path
-                  d="M 28 28 m 0, -18 a 18 18 0 0 1 0 36 a 18 18 0 0 1 0 -36"
-                  stroke="#fff"
-                  strokeLinecap="round"
-                  strokeDasharray="113.113"
-                  strokeDashoffset={dashOffset}
-                  strokeWidth="6"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
+<button
+  type="button"
+  className="mt-10 py-1 inline-flex px-2 flex items-center font-semibold justify-center gap-x-2 text-md font-semibold rounded-lg border border-transparent text-white bg-gray-300 hover:bg-blue-400 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+>
+
+  Post
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="icon icon-tabler icon-tabler-square-rounded-plus text-blue-600"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    strokeWidth="2"
+    stroke="currentColor"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+    <path d="M15 12h-6" />
+    <path d="M12 9v6" />
+  </svg>
+</button>
+
+        <div className="flex-grow" />
       </div>
 
       <div className="flex-shrink-0 overflow-hidden p-2">
         <div className="flex items-center h-full sm:justify-center xl:justify-start p-2 sidebar-separator-bottom">
-          <Image url="mock_faces_8" className="w-10 h-10" />
+          <Image url="/Grace.jpg" className="w-10 h-10" />
           <div className="block sm:hidden xl:block ml-2 font-bold ">
-            Jerry Wilson
+            Grace Mukisa
           </div>
           <div className="flex-grow block sm:hidden xl:block" />
           <Icon
@@ -241,7 +205,7 @@ function Sidebar({ onSidebarHide, showSidebar }) {
     </div>
   );
 }
-function MenuItem({ item: { id, title, notifications }, onClick, selected }) {
+function MenuItem({ item: { id, title, dashboard }, onClick, selected }) {
   return (
     <div
       className={clsx(
@@ -253,9 +217,9 @@ function MenuItem({ item: { id, title, notifications }, onClick, selected }) {
       <SidebarIcons id={id} />
       <div className="block sm:hidden xl:block ml-2">{title}</div>
       <div className="block sm:hidden xl:block flex-grow" />
-      {notifications && (
+      {dashboard && (
         <div className="flex sm:hidden xl:flex bg-pink-600  w-5 h-5 flex items-center justify-center rounded-full mr-2">
-          <div className="text-white text-sm">{notifications}</div>
+          <div className="text-white text-sm">{dashboard}</div>
         </div>
       )}
     </div>
@@ -319,29 +283,29 @@ function Content({ onSidebarHide }) {
           )
         )}
 
-        <div className="">
+        <div className="w-full p-2 lg:w-1/2">
           <div className="rounded-lg bg-card sm:h-80 h-60">
-           
-          </div>
-           <Graph />
-        </div>
-        <div className="w-full p-2 lg:w-1/3">
-          <div className="rounded-lg bg-card h-80">
-            <TrendingPosts />
+            <Graph />
           </div>
         </div>
 
-        <div className="w-full p-2 lg:w-1/3">
+        <div className="w-full p-2 lg:w-1/2">
+          <div className="rounded-lg bg-card h-80">
+            <NearbyCommunities />
+          </div>
+        </div>
+
+        <div className="w-full p-2 lg:w-3/3">
           <div className="rounded-lg bg-card h-80">
             <Segmentation />
           </div>
         </div>
-        <div className="w-full p-2 lg:w-1/3">
+        <div className="w-full p-2 lg:w-3/3">
           <div className="rounded-lg bg-card h-80">
             <Satisfication />
           </div>
         </div>
-        <div className="w-full p-2 lg:w-1/3">
+        <div className="w-full p-2 lg:w-3/3">
           <div className="rounded-lg bg-card overflow-hidden h-80">
             <AddComponent />
           </div>
@@ -406,108 +370,135 @@ function NameCard({ name, username, rise, location, url, lastSeen }) {
     </div>
   );
 }
-function Graph() {
+
+const Carousel = ({ items }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const goToPrevious = () => {
+    setActiveIndex((prevIndex) =>
+      prevIndex === 0 ? items.length - 1 : prevIndex - 1
+    );
+  };
+
+  const goToNext = () => {
+    setActiveIndex((prevIndex) =>
+      prevIndex === items.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
   return (
-    // <div className="flex p-4 h-full flex-col">
-    //   <div className="">
-    //     <div className="flex items-center">
-    //       <div className="font-bold text-white">Local Faves</div>
-    //       <div className="flex-grow" />
+    <div className="relative w-full pt-4">
+      <div className="overflow-hidden w-full ">
+        <div
+          className="flex transition-transform duration-700"
+          style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+        >
+          {items.map((item, index) => (
+            <div key={index} className="flex-none w-full ">
+              <div className="flex items-center bg-white shadow-lg rounded-lg overflow-hidden h-full">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-1/3 h-full object-cover"
+                />{" "}
+                {/* The image fills half the width and the full height of the card */}
+                <div className="w-2/3 p-4 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-xl font-semibold">{item.title}</h3>
+                    <p className="text-gray-700">{item.description}</p>
+                  </div>
+                  <div className="flex items-center mt-4">
+                    <div className="flex-shrink-0">
+                      <a href="#" className="block relative">
+                        <img
+                          alt="profile"
+                          src={item.authorImage}
+                          className="mx-auto object-cover rounded-full h-10 w-10 "
+                        />
+                      </a>
+                    </div>
+                    <div className="ml-3">
+                      <p className="text-sm font-medium leading-none">
+                        {item.authorName}
+                      </p>
+                      <p className="text-sm text-gray-600">{item.date}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <button
+        onClick={goToPrevious}
+        className="absolute top-1/2 left-0 z-10 p-2 text-white bg-black bg-opacity-50"
+      >
+        Prev
+      </button>
+      <button
+        onClick={goToNext}
+        className="absolute top-1/2 right-0 z-10 p-2 text-white bg-black bg-opacity-50"
+      >
+        Next
+      </button>
+    </div>
+  );
+};
 
-    //       <div className="ml-2">Previously</div>
-    //     </div>
-    //   </div>
+function Graph() {
+  const CustomTooltip = () => (
+    <div className="rounded-xl overflow-hidden tooltip-head">
+      <div className="flex items-center justify-between p-2">
+        <div className="">Revenue</div>
+        <Icon path="res-react-dash-options" className="w-2 h-2" />
+      </div>
+      <div className="tooltip-body text-center p-3">
+        <div className="text-white font-bold">$1300.50</div>
+        <div className="">Revenue from 230 sales</div>
+      </div>
+    </div>
+  );
+  return (
+    <div className="flex p-4 h-full flex-col">
+      <div className="">
+        <div className="flex items-center">
+          <div className="font-bold text-white">Local Faves</div>
+          <div className="flex-grow" />
 
-    
-    // </div>
-    
-    <div className="carousel w-full">
-    <div id="slide1" className="carousel-item relative w-full">
-      <img
-        src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg"
-        className="w-full"
-      />
-      <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-        <a href="#slide4" className="btn btn-circle">
-          ❮
-        </a>
-        <a href="#slide2" className="btn btn-circle">
-          ❯
-        </a>
+          <Icon path="res-react-dash-graph-range" className="w-4 h-4" />
+          <div className="ml-2">Last 9 Months</div>
+        </div>
+        <div className="font-bold ml-5">Nov - July</div>
       </div>
+      <Carousel items={items} />
     </div>
-    <div id="slide2" className="carousel-item relative w-full">
-      <img
-        src="https://daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.jpg"
-        className="w-full"
-      />
-      <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-        <a href="#slide1" className="btn btn-circle">
-          ❮
-        </a>
-        <a href="#slide3" className="btn btn-circle">
-          ❯
-        </a>
-      </div>
-    </div>
-    <div id="slide3" className="carousel-item relative w-full">
-      <img
-        src="https://daisyui.com/images/stock/photo-1414694762283-acccc27bca85.jpg"
-        className="w-full"
-      />
-      <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-        <a href="#slide2" className="btn btn-circle">
-          ❮
-        </a>
-        <a href="#slide4" className="btn btn-circle">
-          ❯
-        </a>
-      </div>
-    </div>
-    <div id="slide4" className="carousel-item relative w-full">
-      <img
-        src="https://daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.jpg"
-        className="w-full"
-      />
-      <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-        <a href="#slide3" className="btn btn-circle">
-          ❮
-        </a>
-        <a href="#slide1" className="btn btn-circle">
-          ❯
-        </a>
-      </div>
-    </div>
-  </div>
-
   );
 }
 
-function TrendingPosts() {
+function NearbyCommunities() {
   return (
     <div className="flex p-4 flex-col h-full">
       <div className="flex justify-between items-center">
-        <div className="text-white font-bold">Trending Posts</div>
+        <div className="text-white font-bold">Communities</div>
         <Icon path="res-react-dash-plus" className="w-5 h-5" />
       </div>
-      <div className="">In your Area</div>
-      {Countrydata.map(({ name, views, id }) => (
+      <div className="">Areas</div>
+      {Countrydata.map(({ name, Members, id, join }) => (
         <div className="flex items-center mt-3" key={id}>
           <div className="">{id}</div>
 
-          
           <div className="ml-2">{name}</div>
           <div className="flex-grow" />
-          <div className="">views
-          <div className="">{`${views.toLocaleString()}`}</div>
+          <div className="">
+            Members
+            <div className="">{`${Members.toLocaleString()}`}</div>
           </div>
-          
-          
         </div>
       ))}
       <div className="flex-grow" />
       <div className="flex justify-center">
-        <div className="">Check All</div>
+        <div className="">See More</div>
       </div>
     </div>
   );
