@@ -72,10 +72,10 @@ const segmentationData = [
 
 const sidebarItems = [
   [
-    { id: "0", title: "Dashboard", dashboard: false },
-    { id: "1", title: "Message", dashboard: 7 },
-    { id: "2", title: "Chat", dashboard: 9 },
-    { id: "3", title: "Group", dashboard: true },
+    { id: "0", title: "Home", dashboard: false },
+    { id: "1", title: "Discover", dashboard: 7 },
+    { id: "2", title: "Opportunities", dashboard: 9 },
+    { id: "3", title: "Group", dashboard: 10 },
   ],
 
   [
@@ -141,6 +141,7 @@ function Sidebar({ onSidebarHide, showSidebar }) {
       </div>
       <div className="flex-grow overflow-x-hidden overflow-y-auto flex flex-col">
         <div className="w-full p-2 h-14 sm:h-10 xl:h-5 hidden sm:block flex-shrink-0"></div>
+        
         {sidebarItems[0].map((i) => (
           <MenuItem
             key={i.id}
@@ -152,7 +153,22 @@ function Sidebar({ onSidebarHide, showSidebar }) {
         <div className="mt-8 mb-0 font-bold px-3 block sm:hidden xl:block">
           SHORTCUTS
         </div>
+        
+        
+        
+        
         {sidebarItems[1].map((i) => (
+          <MenuItem
+            key={i.id}
+            item={i}
+            onClick={setSelected}
+            selected={selected}
+          />
+        ))}
+        <div className="mt-8 mb-0 font-bold px-3 block sm:hidden xl:block">
+          SHORTCUTS
+        </div>
+        {sidebarItems[2].map((i) => (
           <MenuItem
             key={i.id}
             item={i}
@@ -295,16 +311,16 @@ function Content({ onSidebarHide }) {
           </div>
         </div>
 
-        <div className="w-full p-2 lg:w-3/3">
+        {/* <div className="w-full p-2 lg:w-3/3">
           <div className="rounded-lg bg-card h-80">
             <Segmentation />
           </div>
-        </div>
-        <div className="w-full p-2 lg:w-3/3">
+        </div> */}
+        {/* <div className="w-full p-2 lg:w-3/3">
           <div className="rounded-lg bg-card h-80">
             <Satisfication />
           </div>
-        </div>
+        </div> */}
         <div className="w-full p-2 lg:w-3/3">
           <div className="rounded-lg bg-card overflow-hidden h-80">
             <AddComponent />
@@ -501,6 +517,30 @@ function NearbyCommunities() {
         <div className="">See More</div>
       </div>
     </div>
+  );
+}
+
+function UpcomingEvents(){
+  return(
+   <div className="flex p-4 flex-col h-full justify-between ">
+    <div className="">Areas</div>
+    {Countrydata.map(({ name, Members, id, join }) => (
+      <div className="flex items-center mt-3" key={id}>
+        <div className="">{id}</div>
+
+        <div className="ml-2">{name}</div>
+        <div className="flex-grow" />
+        <div className="">
+          Members
+          <div className="">{`${Members.toLocaleString()}`}</div>
+        </div>
+      </div>
+    ))}
+    <div className="flex-grow" />
+    <div className="flex justify-center">
+      <div className="">See More</div>
+    </div>
+  </div>
   );
 }
 
@@ -785,34 +825,11 @@ function AddComponent() {
           />
         </div>
         <div className="text-white font-bold mt-3">
-          No Components Created Yet
+        Upcoming Events
         </div>
-        <div className="mt-2">Simply create your first component</div>
-        <div className="mt-1">Just click on the button</div>
-        <div
-          className="flex items-center p-3 mt-3"
-          style={{
-            background: "#2f49d1",
-            borderRadius: "15px",
-            padding: "8px 16px",
-            justifyContent: "center",
-            color: "white",
-          }}
-        >
-          <Icon path="res-react-dash-add-component" className="w-5 h-5" />
-          <div className="ml-2">Add Component</div>
-          <div
-            className="ml-2"
-            style={{
-              background: "#4964ed",
-              borderRadius: "15px",
-              padding: "4px 8px 4px 8px",
-            }}
-          >
-            129
-          </div>
-        </div>
+       
       </div>
+      <UpcomingEvents/>
     </div>
   );
 }
