@@ -1,15 +1,6 @@
 import React from "react";
 import "../App.css";
 import { useSpring, animated, config } from "react-spring";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
 
 import clsx from "https://cdn.skypack.dev/clsx@1.1.1";
 const { useState } = React;
@@ -78,27 +69,6 @@ const sidebarItems = [
     { id: "6", title: "Settings", notifications: false },
   ],
 ];
-
-const graphData = [
-  "Nov",
-  "Dec",
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "June",
-  "July",
-].map((i) => {
-  const revenue = 500 + Math.random() * 2000;
-  const expectedRevenue = Math.max(revenue + (Math.random() - 0.5) * 2000, 0);
-  return {
-    name: i,
-    revenue,
-    expectedRevenue,
-    sales: Math.floor(Math.random() * 500),
-  };
-});
 
 const Dashboard = () => {
   const [showSidebar, onSetShowSidebar] = useState(false);
@@ -349,10 +319,11 @@ function Content({ onSidebarHide }) {
           )
         )}
 
-        <div className="w-full p-2 lg:w-2/3">
+        <div className="">
           <div className="rounded-lg bg-card sm:h-80 h-60">
-            <Graph />
+           
           </div>
+           <Graph />
         </div>
         <div className="w-full p-2 lg:w-1/3">
           <div className="rounded-lg bg-card h-80">
@@ -436,353 +407,79 @@ function NameCard({ name, username, rise, location, url, lastSeen }) {
   );
 }
 function Graph() {
-  const CustomTooltip = () => (
-    <div className="rounded-xl overflow-hidden tooltip-head">
-      <div className="flex items-center justify-between p-2">
-        <div className="">Revenue</div>
-        <Icon path="res-react-dash-options" className="w-2 h-2" />
-      </div>
-      <div className="tooltip-body text-center p-3">
-        <div className="text-white font-bold">$1300.50</div>
-        <div className="">Revenue from 230 sales</div>
-      </div>
-    </div>
-  );
   return (
-    <div className="flex p-4 h-full flex-col">
-      <div className="">
-        <div className="flex items-center">
-          <div className="font-bold text-white">Local Faves</div>
-          <div className="flex-grow" />
+    // <div className="flex p-4 h-full flex-col">
+    //   <div className="">
+    //     <div className="flex items-center">
+    //       <div className="font-bold text-white">Local Faves</div>
+    //       <div className="flex-grow" />
 
-          <Icon path="res-react-dash-graph-range" className="w-4 h-4" />
-          <div className="ml-2">Last 9 Months</div>
-          <div className="ml-6 w-5 h-5 flex justify-center items-center rounded-full icon-background">
-            ?
-          </div>
-        </div>
-        <div className="font-bold ml-5">Nov - July</div>
-      </div>
+    //       <div className="ml-2">Previously</div>
+    //     </div>
+    //   </div>
 
-      {/* <div
-        id="controls-carousel"
-        className="relative w-full"
-        data-carousel="static"
-      >
-        <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
-          <div className="duration-700 ease-in-out" data-carousel-item>
-            <div className="max-w-sm w-full lg:max-w-full lg:flex">
-              <div
-                className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-                style={{ backgroundImage: "url('/immunisation.webp')" }}
-                title="Immunisation"
-              ></div>
-              <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                <div className="mb-8">
-                  <p className="text-sm text-gray-600 flex items-center">
-                    <svg
-                      className="fill-current text-gray-500 w-3 h-3 mr-2"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
-                    </svg>
-                    Members only
-                  </p>
-                  <div className="text-gray-900 font-bold text-xl mb-2">
-                    Can coffee make you a better developer?
-                  </div>
-                  <p className="text-gray-700 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Voluptatibus quia, nulla! Maiores et perferendis eaque,
-                    exercitationem praesentium nihil.
-                  </p>
-                </div>
-                <div className="flex items-center">
-                  <img
-                    className="w-10 h-10 rounded-full mr-4"
-                    src="/public/immunisation.webp"
-                  />
-                  <div className="text-sm">
-                    <p className="text-gray-900 leading-none">
-                      Jonathan Reinink
-                    </p>
-                    <p className="text-gray-600">Aug 18</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          
-          <div
-            className="hidden duration-700 ease-in-out"
-            data-carousel-item="active"
-          >
-            <div className="max-w-sm w-full lg:max-w-full lg:flex">
-              <div
-                className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-                style={{ backgroundImage: "url('/immunisation.webp')" }}
-                title="Immunisation"
-              ></div>
-              <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                <div className="mb-8">
-                  <p className="text-sm text-gray-600 flex items-center">
-                    <svg
-                      className="fill-current text-gray-500 w-3 h-3 mr-2"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
-                    </svg>
-                    Members only
-                  </p>
-                  <div className="text-gray-900 font-bold text-xl mb-2">
-                    Can coffee make you a better developer?
-                  </div>
-                  <p className="text-gray-700 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Voluptatibus quia, nulla! Maiores et perferendis eaque,
-                    exercitationem praesentium nihil.
-                  </p>
-                </div>
-                <div className="flex items-center">
-                  <img
-                    className="w-10 h-10 rounded-full mr-4"
-                    src="/public/immunisation.webp"
-                  />
-                  <div className="text-sm">
-                    <p className="text-gray-900 leading-none">
-                      Jonathan Reinink
-                    </p>
-                    <p className="text-gray-600">Aug 18</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="hidden duration-700 ease-in-out" data-carousel-item>
-            <div className="max-w-sm w-full lg:max-w-full lg:flex">
-              <div
-                className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-                style={{ backgroundImage: "url('/immunisation.webp')" }}
-                title="Immunisation"
-              ></div>
-              <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                <div className="mb-8">
-                  <p className="text-sm text-gray-600 flex items-center">
-                    <svg
-                      className="fill-current text-gray-500 w-3 h-3 mr-2"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
-                    </svg>
-                    Members only
-                  </p>
-                  <div className="text-gray-900 font-bold text-xl mb-2">
-                    Can coffee make you a better developer?
-                  </div>
-                  <p className="text-gray-700 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Voluptatibus quia, nulla! Maiores et perferendis eaque,
-                    exercitationem praesentium nihil.
-                  </p>
-                </div>
-                <div className="flex items-center">
-                  <img
-                    className="w-10 h-10 rounded-full mr-4"
-                    src="/santa.jpeg"
-                  />
-                  <div className="text-sm">
-                    <p className="text-gray-900 leading-none">
-                      Jonathan Reinink
-                    </p>
-                    <p className="text-gray-600">Aug 18</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="hidden duration-700 ease-in-out" data-carousel-item>
-            <img
-              src="/docs/images/carousel/carousel-4.svg"
-              className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-              alt="..."
-            />
-          </div>
-
-          <div className="hidden duration-700 ease-in-out" data-carousel-item>
-            <img
-              src="/docs/images/carousel/carousel-5.svg"
-              className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-              alt="..."
-            />
-          </div>
-        </div>
-
-        <button
-          type="button"
-          className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-          data-carousel-prev
-        >
-          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-300/30 hover:bg-gray-300/50 focus:bg-gray-300/70 focus:ring-4 focus:ring-gray-400/70 focus:outline-none">
-            <svg
-              className="w-4 h-4 text-gray-700/90"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 6 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 1 1 5l4 4"
-              />
-            </svg>
-            <span className="sr-only">Previous</span>
-          </span>
-        </button>
-        <button
-          type="button"
-          className="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-          data-carousel-next
-        >
-          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-300/30 hover:bg-gray-300/50 focus:bg-gray-300/70 focus:ring-4 focus:ring-gray-400/70 focus:outline-none">
-            <svg
-              className="w-4 h-4 text-gray-700/90"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 6 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m1 9 4-4-4-4"
-              />
-            </svg>
-            <span className="sr-only">Next</span>
-          </span>
-        </button>
-      </div> */}
-
-      <div
-        data-hs-carousel='{
-    "loadingClasses": "opacity-0"
-  }'
-        className="relative"
-      >
-        <div className="hs-carousel relative w-full min-h-[350px] bg-white rounded-lg overflow-hidden">
-          <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 ">
-            <div className="hs-carousel-slide">
-              <div className="flex justify-center h-full bg-gray-300 p-6">
-                <span className="self-center text-4xl transition duration-700">
-                  <div className="h-60 max-w-sm w-full lg:max-w-full lg:flex">
-                    <div
-                      className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-                      style={{ backgroundImage: `url('/immunisation.webp')` }}
-                      title="Pregnant Woman"
-                    ></div>
-                    <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal w-full">
-                      <div className="mb-2 border-red">
-                        <p className="py-4 text-sm text-gray-600 flex items-center">
-                          Community Update
-                        </p>
-                        <div className="bg-blue-300 text-gray-900 font-bold text-xl mb-2">
-                          Can coffee make you a better developer?
-                        </div>
-                        <p className=" bg-gray-200 text-gray-700 text-base">
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Voluptatibus quia, nulla! Maiores et perferendis
-                          eaque, exercitationem praesentium nihil.
-                        </p>
-                      </div>
-                      <div className="flex items-center">
-                        <img
-                          className="w-10 h-10 rounded-full mr-4"
-                          src="/img/jonathan.jpg"
-                          alt="Avatar of Jonathan Reinink"
-                        />
-                        <div className="text-sm">
-                          <p className="text-gray-900 leading-none">
-                            Jonathan Reinink
-                          </p>
-                          <p className="text-gray-600">Aug 18</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </span>
-              </div>
-            </div>
-            <div className="hs-carousel-slide">
-              <div className="flex justify-center h-full bg-gray-400 p-6">
-                <span className="self-center text-4xl transition duration-700">
-                  Second slide
-                </span>
-              </div>
-            </div>
-            <div className="hs-carousel-slide">
-              <div className="flex justify-center h-full bg-gray-500 p-6">
-                <span className="self-center text-4xl transition duration-700">
-                  Third slide
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <button
-          type="button"
-          className="hs-carousel-prev hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/[.1]"
-        >
-          <span className="text-2xl" aria-hidden="true">
-            <svg
-              className="w-4 h-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fillRule="evenodd"
-                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
-              />
-            </svg>
-          </span>
-          <span className="sr-only">Previous</span>
-        </button>
-        <button
-          type="button"
-          className="hs-carousel-next hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/[.1]"
-        >
-          <span className="sr-only">Next</span>
-          <span className="text-2xl" aria-hidden="true">
-            <svg
-              className="w-4 h-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-              />
-            </svg>
-          </span>
-        </button>
+    
+    // </div>
+    
+    <div className="carousel w-full">
+    <div id="slide1" className="carousel-item relative w-full">
+      <img
+        src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg"
+        className="w-full"
+      />
+      <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <a href="#slide4" className="btn btn-circle">
+          ❮
+        </a>
+        <a href="#slide2" className="btn btn-circle">
+          ❯
+        </a>
       </div>
     </div>
+    <div id="slide2" className="carousel-item relative w-full">
+      <img
+        src="https://daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.jpg"
+        className="w-full"
+      />
+      <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <a href="#slide1" className="btn btn-circle">
+          ❮
+        </a>
+        <a href="#slide3" className="btn btn-circle">
+          ❯
+        </a>
+      </div>
+    </div>
+    <div id="slide3" className="carousel-item relative w-full">
+      <img
+        src="https://daisyui.com/images/stock/photo-1414694762283-acccc27bca85.jpg"
+        className="w-full"
+      />
+      <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <a href="#slide2" className="btn btn-circle">
+          ❮
+        </a>
+        <a href="#slide4" className="btn btn-circle">
+          ❯
+        </a>
+      </div>
+    </div>
+    <div id="slide4" className="carousel-item relative w-full">
+      <img
+        src="https://daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.jpg"
+        className="w-full"
+      />
+      <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <a href="#slide3" className="btn btn-circle">
+          ❮
+        </a>
+        <a href="#slide1" className="btn btn-circle">
+          ❯
+        </a>
+      </div>
+    </div>
+  </div>
+
   );
 }
 
