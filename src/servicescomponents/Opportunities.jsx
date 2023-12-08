@@ -1,23 +1,17 @@
-import { useState } from 'react'
 import React from "react";
-import Headeropp from './Headeropp';
-import Navopp from './Navopp';
-import Footeropp from './Footeropp';
-import Asideopp from './Asideopp';
-import Cardsopp from './Cardsopp';
+import Headeropp from "./Headeropp";
+import Navopp from "./Navopp";
+import Footeropp from "./Footeropp";
 
+function Opportunities() {
+  return (
+    <>
+      <Navopp />
+      <Headeropp />
 
-
-function Opportunities(){
-    const [opened, { toggle }] = useDisclosure();
-
-    return (
-        <>
-        </>
-       
-    )
+      <Footeropp />
+    </>
+  );
 }
 
-export default Opportunities
-
-
+export default Opportunities;
