@@ -302,7 +302,7 @@ function Content({ onSidebarHide }) {
         </div>
         <div className="w-full p-2 lg:w-3/3">
           <div className="rounded-lg bg-card overflow-hidden h-80">
-            <AddComponent />
+            <Headlines />
           </div>
         </div>
       </div>
@@ -462,19 +462,22 @@ function NearbyCommunities() {
         <div className="text-white font-bold">Communities</div>
         <Icon path="res-react-dash-plus" className="w-5 h-5" />
       </div>
-      <div className="">Areas</div>
+      <div className="flex gap-4">Areas</div>
       {Countrydata.map(({ name, Members, id, join }) => (
         <div className="flex items-center mt-3" key={id}>
           <div className="">{id}</div>
 
-          <div className="ml-4">{name}</div>
+          <div className="ml-3">{name}</div>
           <div className="flex-grow" />
-          <div className="ml-1">
+          {/* <div className="ml-1">
             Members
             <div className="ml-2">{`${Members.toLocaleString()}`}</div>
-          </div>
-          <div className="ml-3">{join}</div>
-          <button onClick={() => handleJoin(id)} className="ml-3 bg-blue-500 text-white px-2 py-1 rounded-md">
+          </div> */}
+         
+          <button className="bg-blue-500 text-white px-2 rounded-md">
+          <span>
+            
+            </span>
       Join
     </button>
         </div>
@@ -487,17 +490,17 @@ function NearbyCommunities() {
   );
 }
 
-function UpcomingEvents() {
+function TrendingPosts() {
   return (
     <div className="flex p-4 flex-col h-full justify-between ">
-      <div className="">Areas</div>
+      <div className="flex gap-4">Areas</div>
       {Countrydata.map(({ name, Members, id, join }) => (
         <div className="flex items-center mt-3" key={id}>
           <div className="">{id}</div>
 
           <div className="ml-2">{name}</div>
           <div className="flex-grow" />
-          <div className="">
+          <div className="flex gap-8">
             Members
             <div className="">{`${Members.toLocaleString()}`}</div>
           </div>
@@ -511,37 +514,39 @@ function UpcomingEvents() {
   );
 }
 
-function AddComponent() {
+function Headlines() {
   return (
-    <div>
-      <div className="w-full h-20 add-component-head" />
-      <div
-        className="flex flex-col items-center"
-        style={{
-          transform: "translate(0, -40px)",
-        }}
-      >
-        <div
-          className=""
-          style={{
-            background: "#414455",
-            width: "80px",
-            height: "80px",
-            borderRadius: "999px",
-          }}
-        >
-          <img
-            src="https://assets.codepen.io/3685267/res-react-dash-rocket.svg"
-            alt=""
-            className="w-full h-full"
-          />
+    <div className="flex justify-center w-full px-4 md:px-8 lg:px-12 xl:px-20">
+      <div className="max-w-screen-lg w-full">
+        {/* Header */}
+        <div className="w-full h-16 lg:h-20 bg-gray-200 rounded-t-lg flex items-center justify-center">
+          <h2 className="text-lg lg:text-xl font-semibold text-gray-800">Trending Posts</h2>
         </div>
-        <div className="text-white font-bold mt-3">Upcoming Events</div>
+
+        {/* Icon and Label */}
+        <div className="flex flex-col items-center mt-[-20%] lg:mt-[-25%] xl:mt-[-30%]">
+          <div className="bg-blue-500 rounded-full w-32 lg:w-40 xl:w-48 h-32 lg:h-40 xl:h-48 flex items-center justify-center">
+            <img
+              src="https://assets.codepen.io/3685267/res-react-dash-rocket.svg"
+              alt="Rocket Icon"
+              className="w-24 lg:w-32 xl:w-40 h-24 lg:h-32 xl:h-40"
+            />
+          </div>
+          <div className="text-gray-800 font-bold mt-3 text-lg lg:text-xl xl:text-2xl">
+            Trending Posts
+          </div>
+        </div>
+
+        {/* TrendingPosts component */}
+        <div className="overflow-hidden">
+          <TrendingPosts />
+        </div>
       </div>
-      <UpcomingEvents />
     </div>
   );
 }
+
+
 
 function SidebarIcons({ id }) {
   const icons = {
