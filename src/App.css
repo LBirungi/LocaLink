@@ -17,24 +17,25 @@ ul, ol {
 body{
   font-family: 'Nunito', sans-serif;
   color:#676767;
-  background-color: #1e1e1e;
+  background-color:#31376F;
 }
 
 .bg-card{
-  background-color:#171717;
+  background-color:#1D203E;
+}
+.bg-sidebar{
+  background-color: #888e54;
 }
 .bg-sidebar-card-top{
-  background-color: #353535;
+  background-color: #1C0A43;
 }
 .sidebar-separator-top{
-  border-bottom: 1px solid #2e2e2e;
+  border-bottom: 1px solid #E8A9FF;
 }
 .sidebar-separator-bottom{
-  border-top: 1px solid #2e2e2e;
+  border-top: 1px solid #E8A9FF;
 }
-.text-premium-yellow{
-  color: #f7b91c;
-}
+
 .icon-background{
   background: #2d2d2d;
 }
@@ -55,7 +56,7 @@ background: #1d1d1d;
   border-bottom: 2px solid #696969;
 }
 .bg-details{
-  background-color: #1e1e1e;
+  background-color: #E8A9FF;
 }
 
 .add-component-head{
