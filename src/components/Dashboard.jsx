@@ -317,7 +317,7 @@ function NameCard({ name, username,location, url, lastSeen }) {
       <div className="rounded-lg bg-card flex justify-between p-3 h-32">
         <div className="">
           <div className="flex items-center">
-            <Image url={url} className="w-10 h-10" />
+            <Image url={url} className="w-11 h-11" />
             <div className="ml-2">
               <div className="flex items-center">
                 <div className="mr-2 font-bold text-white">{name}</div>
@@ -377,7 +377,7 @@ const Carousel = ({ items }) => {
   };
 
   return (
-    <div className="relative w-full pt-4">
+    <div className="relative w-full pt-4 h-1/2">
       <div className="overflow-hidden w-full ">
         <div
           className="flex transition-transform duration-700"
@@ -389,7 +389,7 @@ const Carousel = ({ items }) => {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-1/3 h-full object-cover"
+                  className=" h-2 w-1/3 h-full object-cover"
                 />
                 {""}
                 {/* The image fills half the width and the full height of the card */}
@@ -449,12 +449,12 @@ function Card() {
         </div>
       </div>
       <div className="bg-green-300">
-        <Carousel className="bg-pink-400" items={items} />
+        <Carousel className="bg-pink-400 h-2/3" items={items} />
       </div>
     </div>
   );
 }
-
+git
 function NearbyCommunities() {
   return (
     <div className="flex p-4 flex-col h-full">
