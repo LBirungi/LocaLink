@@ -5,6 +5,7 @@ import Discover from "./discovercomponents/Discover";
 import Homeland from "./landing/Homeland.jsx";
 import Opportunities from "./servicescomponents/Opportunities.jsx";
 import Signup from "./landing/Signup.jsx";
+import AdultLearning from "./learningcomponents/adultlearning.jsx";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="discover" element={<Discover/>} />
         <Route path="opportunities" element={<Opportunities/>} />
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="adultLearning" element={<AdultLearning/>}/>
         
       </Routes>
     </Router>
