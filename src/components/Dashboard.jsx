@@ -159,7 +159,7 @@ function Sidebar({ onSidebarHide, showSidebar }) {
             selected={selected}
           />
         ))}
-        <div className="mt-8 mb-0 font-bold px-3 block sm:hidden xl:block">
+        <div className="mt-4 mb-0 font-bold px-3 block sm:hidden xl:block">
           NOTIFICATIONS
         </div>
 
@@ -171,7 +171,7 @@ function Sidebar({ onSidebarHide, showSidebar }) {
             selected={selected}
           />
         ))}
-        <div className="mt-8 mb-0 font-bold px-3 block sm:hidden xl:block">
+        <div className="mt-4 mb-0 font-bold px-3 block sm:hidden xl:block">
           LINK US
         </div>
         {sidebarItems[2].map((i) => (
@@ -183,29 +183,7 @@ function Sidebar({ onSidebarHide, showSidebar }) {
           />
         ))}
 
-        <button
-          type="button"
-          className="bg-blue-600 mt-10 py-1 inline-flex px-2 flex items-center font-semibold justify-center gap-x-2 text-md font-semibold rounded-lg border border-transparent text-white  hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-        >
-          Post
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="icon icon-tabler icon-tabler-square-rounded-plus text-white"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
-            <path d="M15 12h-6" />
-            <path d="M12 9v6" />
-          </svg>
-        </button>
+       
 
         <div className="flex-grow" />
       </div>
@@ -259,6 +237,7 @@ function Content({ onSidebarHide }) {
               <div className="flex items-center">
                 <div className="text-3xl font-bold text-white">Hello Grace</div>
               </div>
+              
             </div>
             <IconButton
               icon="res-react-dash-sidebar-open"
@@ -266,11 +245,38 @@ function Content({ onSidebarHide }) {
               onClick={onSidebarHide}
             />
           </div>
+          <div className="mr-4">
+          <button
+          type="button"
+          className="bg-blue-600 py-2 inline-flex px-4 flex items-center font-semibold justify-center gap-x-2 text-md font-semibold rounded-lg border border-transparent text-white  hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+        >
+          Post
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon icon-tabler icon-tabler-square-rounded-plus text-white"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+            <path d="M15 12h-6" />
+            <path d="M12 9v6" />
+          </svg>
+        </button>
+          </div>
+
           <div className="w-full sm:w-56 mt-4 sm:mt-0 relative">
             <Icon
               path="res-react-dash-search"
               className="w-5 h-5 search-icon left-3 absolute"
             />
+
             <form action="#" method="POST">
               <input
                 type="text"
@@ -280,7 +286,9 @@ function Content({ onSidebarHide }) {
                 placeholder="search Localink"
               />
             </form>
+            
           </div>
+          
         </div>
         {employeeData.map(
           ({ id, name, username, rise, location, url, lastSeen }) => (
