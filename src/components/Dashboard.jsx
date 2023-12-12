@@ -68,6 +68,14 @@ const Countrydata = [
   { name: "Muyenga", Members: 1812, id: 4 },
 ];
 
+const Posts = [
+  { feed: "Flooded Roads", Post: 1190, id:1, },
+  { feed: "New Year Events",Post: 1910,id:2 },
+  { feed: "Thieves Caught", Post: 1920, id: 3 },
+  { feed: "Christmas Rush", Post: 1812, id: 4 },
+];
+
+
 const sidebarItems = [
   [
     { id: "0", title: "Home", dashboard: false },
@@ -177,12 +185,12 @@ function Sidebar({ onSidebarHide, showSidebar }) {
 
         <button
           type="button"
-          className="mt-10 py-1 inline-flex px-2 flex items-center font-semibold justify-center gap-x-2 text-md font-semibold rounded-lg border border-transparent text-white bg-gray-300 hover:bg-blue-400 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+          className="bg-blue-600 mt-10 py-1 inline-flex px-2 flex items-center font-semibold justify-center gap-x-2 text-md font-semibold rounded-lg border border-transparent text-white  hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
         >
           Post
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="icon icon-tabler icon-tabler-square-rounded-plus text-blue-600"
+            className="icon icon-tabler icon-tabler-square-rounded-plus text-white"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -302,7 +310,7 @@ function Content({ onSidebarHide }) {
         </div>
         <div className="w-full p-2 lg:w-3/3">
           <div className="rounded-lg bg-card overflow-hidden h-80">
-            <AddComponent />
+            <Headlines />
           </div>
         </div>
       </div>
@@ -317,7 +325,7 @@ function NameCard({ name, username,location, url, lastSeen }) {
       <div className="rounded-lg bg-card flex justify-between p-3 h-32">
         <div className="">
           <div className="flex items-center">
-            <Image url={url} className="w-10 h-10" />
+            <Image url={url} className="w-11 h-11" />
             <div className="ml-2">
               <div className="flex items-center">
                 <div className="mr-2 font-bold text-white">{name}</div>
@@ -377,7 +385,7 @@ const Carousel = ({ items }) => {
   };
 
   return (
-    <div className="relative w-full pt-4">
+    <div className="relative w-full pt-4 sm:h-80 h-60 ">
       <div className="overflow-hidden w-full ">
         <div
           className="flex transition-transform duration-700"
@@ -389,7 +397,7 @@ const Carousel = ({ items }) => {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-1/3 h-full object-cover"
+                  className=" h-2 w-1/3 h-full object-cover"
                 />
                 {""}
                 {/* The image fills half the width and the full height of the card */}
@@ -442,18 +450,23 @@ const Carousel = ({ items }) => {
 function Card() {
   return (
     <div className="flex p-4 h-full flex-col">
-      <div className="bg-yellow-500">
+      <div className="">
         <div className="flex items-center">
           <div className="font-bold text-white">Local Faves</div>
           <div className="flex-grow" />
         </div>
       </div>
-      <div className="bg-green-300">
-        <Carousel className="bg-pink-400" items={items} />
+      <div className="">
+        <Carousel className="bg-pink-400 h-2/3" items={items} />
       </div>
     </div>
+
   );
 }
+
+
+
+
 
 function NearbyCommunities() {
   return (
@@ -462,19 +475,22 @@ function NearbyCommunities() {
         <div className="text-white font-bold">Communities</div>
         <Icon path="res-react-dash-plus" className="w-5 h-5" />
       </div>
-      <div className="">Areas</div>
+      <div className="flex gap-4">Areas</div>
       {Countrydata.map(({ name, Members, id, join }) => (
         <div className="flex items-center mt-3" key={id}>
           <div className="">{id}</div>
 
-          <div className="ml-4">{name}</div>
+          <div className="ml-3">{name}</div>
           <div className="flex-grow" />
-          <div className="ml-1">
+          {/* <div className="ml-1">
             Members
             <div className="ml-2">{`${Members.toLocaleString()}`}</div>
-          </div>
-          <div className="ml-3">{join}</div>
-          <button onClick={() => handleJoin(id)} className="ml-3 bg-blue-500 text-white px-2 py-1 rounded-md">
+          </div> */}
+         
+          <button className="bg-blue-600 hover:bg-blue-700 text-white px-2 rounded-md">
+          <span>
+            
+            </span>
       Join
     </button>
         </div>
@@ -487,19 +503,19 @@ function NearbyCommunities() {
   );
 }
 
-function UpcomingEvents() {
+function TrendingPosts() {
   return (
     <div className="flex p-4 flex-col h-full justify-between ">
-      <div className="">Areas</div>
-      {Countrydata.map(({ name, Members, id, join }) => (
+      <div className="flex gap-4 mt-4">Trending</div>
+      {Posts.map(({ feed, Post, id,views}) => (
         <div className="flex items-center mt-3" key={id}>
-          <div className="">{id}</div>
+          <div className="py-1">{id}</div>
 
-          <div className="ml-2">{name}</div>
+          <div className="ml-2">{feed}</div>
           <div className="flex-grow" />
-          <div className="">
-            Members
-            <div className="">{`${Members.toLocaleString()}`}</div>
+          <div className="flex gap-8">
+            Views
+            <div className="flex-grow flex gap-8">{`${Post.toLocaleString()}`}</div>
           </div>
         </div>
       ))}
@@ -511,37 +527,24 @@ function UpcomingEvents() {
   );
 }
 
-function AddComponent() {
+function Headlines() {
   return (
-    <div>
-      <div className="w-full h-20 add-component-head" />
-      <div
-        className="flex flex-col items-center"
-        style={{
-          transform: "translate(0, -40px)",
-        }}
-      >
-        <div
-          className=""
-          style={{
-            background: "#414455",
-            width: "80px",
-            height: "80px",
-            borderRadius: "999px",
-          }}
-        >
-          <img
-            src="https://assets.codepen.io/3685267/res-react-dash-rocket.svg"
-            alt=""
-            className="w-full h-full"
-          />
+    <div className="flex justify-center w-full px-4 md:px-8 lg:px-12 xl:px-20">
+      <div className="max-w-screen-lg w-full">
+        {/* Header */}
+        <div className="mt-10 h-8 lg:h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+          <h2 className="text-lg lg:text-xl font-semibold text-white">Trending Posts</h2>
         </div>
-        <div className="text-white font-bold mt-3">Upcoming Events</div>
+        {/* TrendingPosts component */}
+        <div className="overflow-hidden">
+          <TrendingPosts />
+        </div>
       </div>
-      <UpcomingEvents />
     </div>
   );
 }
+
+
 
 function SidebarIcons({ id }) {
   const icons = {
