@@ -306,7 +306,7 @@ function Content({ onSidebarHide }) {
         )}
 
         <div className="w-full p-2 lg:w-1/2">
-          <div className="rounded-lg bg-card sm:h-80 h-60">
+          <div className="rounded-lg bg-card sm:h-80 ">
             <Card />
           </div>
         </div>
@@ -396,7 +396,7 @@ const Carousel = ({ items }) => {
     <div className="relative w-full pt-4 sm:h-80 h-60 ">
       <div className="overflow-hidden w-full ">
         <div
-          className="flex transition-transform duration-700"
+          className="flex h-60 transition-transform duration-700"
           style={{ transform: `translateX(-${activeIndex * 100}%)` }}
         >
           {items.map((item, index) => (
