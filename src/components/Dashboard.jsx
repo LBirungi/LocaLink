@@ -67,12 +67,7 @@ const Countrydata = [
   { name: "Muyenga", Members: 1812, id: 4 },
 ];
 
-const Posts = [
-  { feed: "Flooded Roads", Post: 1190, id: 1 },
-  { feed: "New Year Events", Post: 1910, id: 2 },
-  { feed: "Thieves Caught", Post: 1920, id: 3 },
-  { feed: "Christmas Rush", Post: 1812, id: 4 },
-];
+const STRAPI_URL=process.env.STRAPI_URL;
 
 const sidebarItems = [
   [
@@ -116,15 +111,6 @@ const Dashboard = () => {
       />
     </div>
   );
-};
-
-const handleJoin = (communityId) => {
-  // Here, you can implement the logic for joining a community
-  // For example, you might make an API call to join the community
-  // or update the state to indicate that the user has joined this community
-
-  // For demonstration purposes, let's log a message indicating the community ID being joined
-  console.log(`Joining community with ID: ${communityId}`);
 };
 
 function Sidebar({ onSidebarHide, showSidebar }) {
@@ -502,9 +488,9 @@ function TrendingPosts() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:1337/api/posts');
+        const response = await axios.get(`${STRAPI_URL}/api/posts`);
         console.log(response.data.data)
-        setData(response.data.data); // Assuming your data is an array, adjust as needed
+        setData(response.data.data); 
       } catch (error) {
         console.error('Error fetching data:', error);
       }
