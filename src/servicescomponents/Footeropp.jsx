@@ -26,7 +26,7 @@ function Footeropp() {
           Enjoy your Experience with LocaLink
           <section id="contact">
             <div id="contact-title">
-              <h1>Connect With Me</h1>
+              <h1>Connect With Us</h1>
             </div>
             <div id="contacticons">
               <a href="#" className="fa fa-facebook">
