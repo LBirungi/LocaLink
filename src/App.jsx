@@ -5,7 +5,7 @@ import Discover from "./discovercomponents/Discover";
 import Homeland from "./landing/Homeland.jsx";
 import Opportunities from "./servicescomponents/Opportunities.jsx";
 import Signup from "./landing/Signup.jsx";
-import PostPage from "./components/Postpage.jsx";
+import PostPage from "./components/PostPage.jsx";
 
 function App() {
   return (
