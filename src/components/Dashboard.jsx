@@ -3,6 +3,7 @@ import axios from 'axios';
 import "../App.css";
 import clsx from "https://cdn.skypack.dev/clsx@1.1.1";
 import { Link } from "react-router-dom";
+import slugify from 'slugify';
 
 
 
@@ -768,8 +769,25 @@ const Modal = ({ showModal, setShowModal }) => {
     console.log("Post Title:", postTitle);
     console.log("Post Content:", postContent);
     setShowModal(false);
-    // Add additional logic for form submission here
-    //post request to API
+    
+
+axios.post(`${VITE_STRAPI_URL}/api/posts`, {
+  // Data to be sent in the POST request's body
+  title:postTitle ,
+  content: postContent,
+  slug:slugify(postTitle)
+})
+.then(response => {
+  // Handle the response data
+  console.log('Response:', response.data);
+})
+.catch(error => {
+  // Handle any errors that occurred during the request
+  console.log('Error:', error);
+});
+
+
+
   };
 
   const handleCancel = () => {
@@ -833,6 +851,7 @@ const Modal = ({ showModal, setShowModal }) => {
                   <button
                     className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                     type="submit"
+                   
                     
                   >
                     Submit Post
