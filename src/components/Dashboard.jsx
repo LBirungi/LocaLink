@@ -68,6 +68,13 @@ const Countrydata = [
   { name: "Muyenga", Members: 1812, id: 4 },
 ];
 
+const Posts = [
+  { feed: "Flooded Roads", Post: 1190, id: 1 },
+  { feed: "New Year Events", Post: 1910, id: 2 },
+  { feed: "Thieves Caught", Post: 1920, id: 3 },
+  { feed: "Christmas Rush", Post: 1812, id: 4 },
+];
+
 const sidebarItems = [
   [
     { id: "0", title: "Home", dashboard: false },
@@ -117,7 +124,6 @@ const handleJoin = (communityId) => {
   console.log(`Joining community with ID: ${communityId}`);
 };
 
-
 function Sidebar({ onSidebarHide, showSidebar }) {
   const [selected, setSelected] = useState("0");
   return (
@@ -151,7 +157,7 @@ function Sidebar({ onSidebarHide, showSidebar }) {
             selected={selected}
           />
         ))}
-        <div className="mt-8 mb-0 font-bold px-3 block sm:hidden xl:block">
+        <div className="mt-4 mb-0 font-bold px-3 block sm:hidden xl:block">
           NOTIFICATIONS
         </div>
 
@@ -163,7 +169,7 @@ function Sidebar({ onSidebarHide, showSidebar }) {
             selected={selected}
           />
         ))}
-        <div className="mt-8 mb-0 font-bold px-3 block sm:hidden xl:block">
+        <div className="mt-4 mb-0 font-bold px-3 block sm:hidden xl:block">
           LINK US
         </div>
         {sidebarItems[2].map((i) => (
@@ -175,33 +181,8 @@ function Sidebar({ onSidebarHide, showSidebar }) {
           />
         ))}
 
-        <button
-          type="button"
-          className="mt-10 py-1 inline-flex px-2 flex items-center font-semibold justify-center gap-x-2 text-md font-semibold rounded-lg border border-transparent text-white bg-gray-300 hover:bg-blue-400 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-        >
-          Post
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="icon icon-tabler icon-tabler-square-rounded-plus text-blue-600"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
-            <path d="M15 12h-6" />
-            <path d="M12 9v6" />
-          </svg>
-        </button>
-
         <div className="flex-grow" />
       </div>
-
       <div className="flex-shrink-0 overflow-hidden p-2">
         <div className="flex items-center h-full sm:justify-center xl:justify-start p-2 sidebar-separator-bottom">
           <Image url="/Grace.jpg" className="w-10 h-10" />
@@ -231,7 +212,7 @@ function MenuItem({ item: { id, title, dashboard }, onClick, selected }) {
       <div className="block sm:hidden xl:block ml-2">{title}</div>
       <div className="block sm:hidden xl:block flex-grow" />
       {dashboard && (
-        <div className="flex sm:hidden xl:flex bg-pink-600  w-5 h-5 flex items-center justify-center rounded-full mr-2">
+        <div className="flex sm:hidden xl:flex bg-blue-600  w-5 h-5 flex items-center justify-center rounded-full mr-2">
           <div className="text-white text-sm">{dashboard}</div>
         </div>
       )}
@@ -239,6 +220,8 @@ function MenuItem({ item: { id, title, dashboard }, onClick, selected }) {
   );
 }
 function Content({ onSidebarHide }) {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <div className="flex w-full">
       <div className="w-full h-screen hidden sm:block sm:w-20 xl:w-60 flex-shrink-0">
@@ -258,11 +241,67 @@ function Content({ onSidebarHide }) {
               onClick={onSidebarHide}
             />
           </div>
+          {/* <div className="mr-4">
+            <button
+              onClick={openModal}
+              data-modal-target="crud-modal"
+              data-modal-toggle="crud-modal"
+              type="button"
+              className="bg-blue-600 py-2 inline-flex px-4 flex items-center font-semibold justify-center gap-x-2 text-md font-semibold rounded-lg border border-transparent text-white  hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+            >
+             
+              Post
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon icon-tabler icon-tabler-square-rounded-plus text-white"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                <path d="M15 12h-6" />
+                <path d="M12 9v6" />
+              </svg>
+            </button>
+          </div> */}
+          <div className="mr-4">
+            <button
+              className="bg-blue-600 py-2 inline-flex px-4 flex items-center font-semibold justify-center gap-x-2 text-md font-semibold rounded-lg border border-transparent text-white  hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+              onClick={() => setShowModal(true)}
+            >
+              Post
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon icon-tabler icon-tabler-square-rounded-plus text-white"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                <path d="M15 12h-6" />
+                <path d="M12 9v6" />
+              </svg>
+            </button>
+          </div>
+          <Modal showModal={showModal} setShowModal={setShowModal} />
           <div className="w-full sm:w-56 mt-4 sm:mt-0 relative">
             <Icon
               path="res-react-dash-search"
               className="w-5 h-5 search-icon left-3 absolute"
             />
+
             <form action="#" method="POST">
               <input
                 type="text"
@@ -290,7 +329,7 @@ function Content({ onSidebarHide }) {
         )}
 
         <div className="w-full p-2 lg:w-1/2">
-          <div className="rounded-lg bg-card sm:h-80 h-60">
+          <div className="rounded-lg bg-card sm:h-80 ">
             <Card />
           </div>
         </div>
@@ -302,22 +341,169 @@ function Content({ onSidebarHide }) {
         </div>
         <div className="w-full p-2 lg:w-3/3">
           <div className="rounded-lg bg-card overflow-hidden h-80">
-            <AddComponent />
+            <Headlines />
           </div>
         </div>
+       
       </div>
     </div>
   );
 }
 
-function NameCard({ name, username,location, url, lastSeen }) {
-  
+// function ModalPost({ isOpen, onClose }) {
+//   const closeModal = () => {
+//     onClose();
+//   };
+
+//   if (!isOpen) {
+//     return null;
+//   }
+
+//   return (
+//     <div className="modal-overlay">
+//       <div className="modal">
+//       <div
+//       id="crud-modal"
+//       tabIndex="-1"
+//       aria-hidden="true"
+//       className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+//     >
+//       <div className="relative p-4 w-full max-w-md max-h-full">
+//         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+//           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+//             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+//               Create New Product
+//             </h3>
+//             <button
+//               type="button"
+//               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+//               data-modal-toggle="crud-modal"
+//             >
+//               <svg
+//                 className="w-3 h-3"
+//                 aria-hidden="true"
+//                 xmlns="http://www.w3.org/2000/svg"
+//                 fill="none"
+//                 viewBox="0 0 14 14"
+//               >
+//                 <path
+//                   stroke="currentColor"
+//                   strokeLinecap="round"
+//                   strokeLinejoin="round"
+//                   strokeWidth="2"
+//                   d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+//                 />
+//               </svg>
+//               <span className="sr-only">Close modal</span>
+//             </button>
+//           </div>
+
+//           <form className="p-4 md:p-5">
+//             <div className="grid gap-4 mb-4 grid-cols-2">
+//               <div className="col-span-2">
+//                 <label
+//                   for="name"
+//                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+//                 >
+//                   Name
+//                 </label>
+//                 <input
+//                   type="text"
+//                   name="name"
+//                   id="name"
+//                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+//                   placeholder="Type product name"
+//                   required=""
+//                 />
+//               </div>
+//               <div className="col-span-2 sm:col-span-1">
+//                 <label
+//                   for="price"
+//                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+//                 >
+//                   Price
+//                 </label>
+//                 <input
+//                   type="number"
+//                   name="price"
+//                   id="price"
+//                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+//                   placeholder="$2999"
+//                   required=""
+//                 />
+//               </div>
+//               <div className="col-span-2 sm:col-span-1">
+//                 <label
+//                   for="category"
+//                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+//                 >
+//                   Category
+//                 </label>
+//                 <select
+//                   id="category"
+//                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+//                 >
+//                   <option selected="">Select category</option>
+//                   <option value="TV">TV/Monitors</option>
+//                   <option value="PC">PC</option>
+//                   <option value="GA">Gaming/Console</option>
+//                   <option value="PH">Phones</option>
+//                 </select>
+//               </div>
+//               <div className="col-span-2">
+//                 <label
+//                   for="description"
+//                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+//                 >
+//                   Product Description
+//                 </label>
+//                 <textarea
+//                   id="description"
+//                   rows="4"
+//                   className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+//                   placeholder="Write product description here"
+//                 ></textarea>
+//               </div>
+//             </div>
+//             <button
+//               type="submit"
+//               className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+//             >
+//               <svg
+//                 className="me-1 -ms-1 w-5 h-5"
+//                 fill="currentColor"
+//                 viewBox="0 0 20 20"
+//                 xmlns="http://www.w3.org/2000/svg"
+//               >
+//                 <path
+//                   fillRule="evenodd"
+//                   d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+//                   clipRule="evenodd"
+//                 ></path>
+//               </svg>
+//               Add new product
+//             </button>
+//           </form>
+//         </div>
+//       </div>
+//     </div>
+//         <h2>Create New Product</h2>
+//         <button onClick={closeModal}>Close Modal</button>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+
+function NameCard({ name, username, location, url, lastSeen }) {
   return (
     <div className="w-full p-2 lg:w-1/3">
       <div className="rounded-lg bg-card flex justify-between p-3 h-32">
         <div className="">
           <div className="flex items-center">
-            <Image url={url} className="w-10 h-10" />
+            <Image url={url} className="w-11 h-11" />
             <div className="ml-2">
               <div className="flex items-center">
                 <div className="mr-2 font-bold text-white">{name}</div>
@@ -377,10 +563,10 @@ const Carousel = ({ items }) => {
   };
 
   return (
-    <div className="relative w-full pt-4">
+    <div className="relative w-full pt-4 sm:h-80 h-60 ">
       <div className="overflow-hidden w-full ">
         <div
-          className="flex transition-transform duration-700"
+          className="flex h-60 transition-transform duration-700"
           style={{ transform: `translateX(-${activeIndex * 100}%)` }}
         >
           {items.map((item, index) => (
@@ -389,7 +575,7 @@ const Carousel = ({ items }) => {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-1/3 h-full object-cover"
+                  className=" h-2 w-1/3 h-full object-cover"
                 />
                 {""}
                 {/* The image fills half the width and the full height of the card */}
@@ -414,7 +600,6 @@ const Carousel = ({ items }) => {
                       <p className="text-sm font-medium leading-none">
                         {item.authorName}
                       </p>
-                      <p className="text-sm text-gray-600">{item.date}</p>
                     </div>
                   </div>
                 </div>
@@ -442,14 +627,14 @@ const Carousel = ({ items }) => {
 function Card() {
   return (
     <div className="flex p-4 h-full flex-col">
-      <div className="bg-yellow-500">
+      <div className="">
         <div className="flex items-center">
           <div className="font-bold text-white">Local Faves</div>
           <div className="flex-grow" />
         </div>
       </div>
-      <div className="bg-green-300">
-        <Carousel className="bg-pink-400" items={items} />
+      <div className="">
+        <Carousel className=" h-2/3" items={items} />
       </div>
     </div>
   );
@@ -462,21 +647,22 @@ function NearbyCommunities() {
         <div className="text-white font-bold">Communities</div>
         <Icon path="res-react-dash-plus" className="w-5 h-5" />
       </div>
-      <div className="">Areas</div>
+      <div className="flex gap-4">Areas</div>
       {Countrydata.map(({ name, Members, id, join }) => (
         <div className="flex items-center mt-3" key={id}>
           <div className="">{id}</div>
 
-          <div className="ml-4">{name}</div>
+          <div className="ml-3">{name}</div>
           <div className="flex-grow" />
-          <div className="ml-1">
+          {/* <div className="ml-1">
             Members
             <div className="ml-2">{`${Members.toLocaleString()}`}</div>
-          </div>
-          <div className="ml-3">{join}</div>
-          <button onClick={() => handleJoin(id)} className="ml-3 bg-blue-500 text-white px-2 py-1 rounded-md">
-      Join
-    </button>
+          </div> */}
+
+          <button className="bg-blue-600 hover:bg-blue-700 text-white px-2 rounded-md">
+            <span></span>
+            Join
+          </button>
         </div>
       ))}
       <div className="flex-grow" />
@@ -487,19 +673,19 @@ function NearbyCommunities() {
   );
 }
 
-function UpcomingEvents() {
+function TrendingPosts() {
   return (
     <div className="flex p-4 flex-col h-full justify-between ">
-      <div className="">Areas</div>
-      {Countrydata.map(({ name, Members, id, join }) => (
+      <div className="flex gap-4 mt-4">Trending</div>
+      {Posts.map(({ feed, Post, id, views }) => (
         <div className="flex items-center mt-3" key={id}>
-          <div className="">{id}</div>
+          <div className="py-1">{id}</div>
 
-          <div className="ml-2">{name}</div>
+          <div className="ml-2">{feed}</div>
           <div className="flex-grow" />
-          <div className="">
-            Members
-            <div className="">{`${Members.toLocaleString()}`}</div>
+          <div className="flex gap-8">
+            Views
+            <div className="flex-grow flex gap-8">{`${Post.toLocaleString()}`}</div>
           </div>
         </div>
       ))}
@@ -511,34 +697,21 @@ function UpcomingEvents() {
   );
 }
 
-function AddComponent() {
+function Headlines() {
   return (
-    <div>
-      <div className="w-full h-20 add-component-head" />
-      <div
-        className="flex flex-col items-center"
-        style={{
-          transform: "translate(0, -40px)",
-        }}
-      >
-        <div
-          className=""
-          style={{
-            background: "#414455",
-            width: "80px",
-            height: "80px",
-            borderRadius: "999px",
-          }}
-        >
-          <img
-            src="https://assets.codepen.io/3685267/res-react-dash-rocket.svg"
-            alt=""
-            className="w-full h-full"
-          />
+    <div className="flex justify-center w-full px-4 md:px-8 lg:px-12 xl:px-20">
+      <div className="max-w-screen-lg w-full">
+        {/* Header */}
+        <div className="mt-10 h-8 lg:h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+          <h2 className="text-lg lg:text-xl font-semibold text-white">
+            Trending Posts
+          </h2>
         </div>
-        <div className="text-white font-bold mt-3">Upcoming Events</div>
+        {/* TrendingPosts component */}
+        <div className="overflow-hidden">
+          <TrendingPosts />
+        </div>
       </div>
-      <UpcomingEvents />
     </div>
   );
 }
@@ -549,15 +722,15 @@ function SidebarIcons({ id }) {
       <>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="icon icon-tabler icon-tabler-home"
+          className="icon icon-tabler icon-tabler-home"
           width="24"
           height="24"
           viewBox="0 0 24 24"
-          stroke-width="2"
+          strokeWidth="2"
           stroke="currentColor"
           fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
@@ -570,15 +743,15 @@ function SidebarIcons({ id }) {
       <>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="icon icon-tabler icon-tabler-map-pin"
+          className="icon icon-tabler icon-tabler-map-pin"
           width="24"
           height="24"
           viewBox="0 0 24 24"
-          stroke-width="2"
+          strokeWidth="2"
           stroke="currentColor"
           fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
@@ -594,15 +767,15 @@ function SidebarIcons({ id }) {
     3: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="icon icon-tabler icon-tabler-briefcase"
+        className="icon icon-tabler icon-tabler-briefcase"
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        stroke-width="2"
+        strokeWidth="2"
         stroke="currentColor"
         fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
@@ -614,15 +787,15 @@ function SidebarIcons({ id }) {
     4: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="icon icon-tabler icon-tabler-message-chatbot"
+        className="icon icon-tabler icon-tabler-message-chatbot"
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        stroke-width="2"
+        strokeWidth="2"
         stroke="currentColor"
         fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" />
@@ -653,15 +826,15 @@ function SidebarIcons({ id }) {
     7: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="icon icon-tabler icon-tabler-info-hexagon"
+        className="icon icon-tabler icon-tabler-info-hexagon"
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        stroke-width="2"
+        strokeWidth="2"
         stroke="currentColor"
         fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M19.875 6.27c.7 .398 1.13 1.143 1.125 1.948v7.284c0 .809 -.443 1.555 -1.158 1.948l-6.75 4.27a2.269 2.269 0 0 1 -2.184 0l-6.75 -4.27a2.225 2.225 0 0 1 -1.158 -1.948v-7.285c0 -.809 .443 -1.554 1.158 -1.947l6.75 -3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98h-.033z" />
@@ -672,15 +845,15 @@ function SidebarIcons({ id }) {
     8: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="icon icon-tabler icon-tabler-phone-call"
+        className="icon icon-tabler icon-tabler-phone-call"
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        stroke-width="2"
+        strokeWidth="2"
         stroke="currentColor"
         fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
@@ -691,15 +864,15 @@ function SidebarIcons({ id }) {
     9: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="icon icon-tabler icon-tabler-help-square-rounded"
+        className="icon icon-tabler icon-tabler-help-square-rounded"
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        stroke-width="2"
+        strokeWidth="2"
         stroke="currentColor"
         fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
@@ -755,5 +928,92 @@ function IconButton({
 function Image({ url, className = "w-4 h-4" }) {
   return <img src={url} alt="" className={clsx(className, "rounded-full")} />;
 }
+
+const Modal = ({ showModal, setShowModal }) => {
+  const [postTitle, setPostTitle] = useState('');
+  const [postContent, setPostContent] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle the form submission logic here
+    console.log("Post Title:", postTitle);
+    console.log("Post Content:", postContent);
+    setShowModal(false);
+    // Add additional logic for form submission here
+  };
+
+  const handleCancel = () => {
+    // Handle the cancel logic here
+    setShowModal(false);
+  };
+
+  return (
+    <>
+      {showModal ? (
+        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="relative w-auto my-6 mx-auto max-w-6xl">
+            
+            <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+              
+              <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
+                <h3 className="text-2xl font-semibold">What's on your mind?</h3>
+                <button
+                  className="p-1 ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                  onClick={handleCancel}
+                >
+                  <span className="bg-transparent text-black h-6 w-6 text-2xl block outline-none focus:outline-none">×</span>
+                </button>
+              </div>
+              
+              <form className="p-6 flex-auto" onSubmit={handleSubmit}>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="post-title">
+                    Title
+                  </label>
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="post-title"
+                    type="text"
+                    placeholder="Title of your post"
+                    value={postTitle}
+                    onChange={(e) => setPostTitle(e.target.value)}
+                  />
+                </div>
+                <div className="mb-6">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="post-content">
+                    Content
+                  </label>
+                  <textarea
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="post-content"
+                    placeholder="Post about issues affecting your community..."
+                    value={postContent}
+                    onChange={(e) => setPostContent(e.target.value)}
+                  />
+                </div>
+                
+                <div className="flex items-center justify-end p-2 border-t border-solid border-gray-300 rounded-b">
+                  <button
+                    className="text-gray-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                    type="button"
+                    onClick={handleCancel}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                    type="submit"
+                  >
+                    Submit Post
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </>
+  );
+};
 
 export default Dashboard;

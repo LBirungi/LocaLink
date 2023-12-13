@@ -13,26 +13,46 @@ const tau = 2 * pi;
 
 const employeeData = [
   {
+    id: 1,
+    name: "Lillian Birungi",
+    username: "@LillianBirungi",
+    rise: true,
+    location: "Nansana",
+    url: "/Lillian.jpeg",
+    lastSeen: "3 days ago",
+  },
+
+  {
     id: 2,
     name: "Ronnie Kagulire",
     username: "@RonnieKagulire",
-    title: "Discover Your Area",
+    rise: false,
     location: "Bwaise",
     url: "/Ronald.png",
     lastSeen: "3 days ago",
+  },
+
+  {
+    id: 3,
+    name: "Johnson Byaruhanga",
+    username: "@JohnsonByaruhanga",
+    rise: true,
+    location: "Nabweru",
+    url: "/Johnson.png",
+    lastSeen: "20 days ago",
   },
 ];
 
 const items = [
   {
-    image: "/Lillian.jpeg",
-    title: "Card 1",
-    description: "Description for card 1.",
+    image: '/Lillian.jpeg',
+    title: 'Card 1',
+    description: 'Description for card 1.'
   },
   {
-    image: "/immunisation.webp",
-    title: "Card 2",
-    description: "Description for card 2.",
+    image: '/plumber.jpg',
+    title: 'Card 2',
+    description: 'Description for card 2.'
   },
   // ... more items
 ];
@@ -53,7 +73,7 @@ const segmentationData = [
 const sidebarItems = [
   [
     { id: "0", title: "Notifications", notifications: false },
-    { id: "1", title: "Message", notifications: 15 },
+    { id: "1", title: "Message", notifications: 7 },
     { id: "2", title: "Chat", notifications: 9 },
     { id: "3", title: "Group", notifications: true },
   ],
@@ -306,7 +326,7 @@ function Content({ onSidebarHide }) {
           </div>
         </div>
         {employeeData.map(
-          ({ id, name, username, rise, location, url, lastSeen, title }) => (
+          ({ id, name, username, rise, location, url, lastSeen }) => (
             <NameCard
               key={id}
               id={id}
@@ -316,14 +336,13 @@ function Content({ onSidebarHide }) {
               location={location}
               url={url}
               lastSeen={lastSeen}
-              title={title}
             />
           )
         )}
 
         <div className="w-full p-2 lg:w-2/3">
           <div className="rounded-lg bg-card sm:h-80 h-60">
-            <Card />
+            <Graph />
           </div>
         </div>
 
@@ -359,7 +378,7 @@ function NameCard({ name, username, rise, location, url, lastSeen }) {
     from: { barPlayhead: 0 },
   });
   return (
-    <div className="w-full p-2 lg:w-3/3">
+    <div className="w-full p-2 lg:w-1/3">
       <div className="rounded-lg bg-card flex justify-between p-3 h-32">
         <div className="">
           <div className="flex items-center">
@@ -427,19 +446,11 @@ const Carousel = ({ items }) => {
   return (
     <div className="relative w-full pt-4">
       <div className="overflow-hidden w-full ">
-        <div
-          className="flex transition-transform duration-700"
-          style={{ transform: `translateX(-${activeIndex * 100}%)` }}
-        >
+        <div className="flex transition-transform duration-700" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
           {items.map((item, index) => (
             <div key={index} className="flex-none w-full ">
               <div className="flex items-center bg-white shadow-lg rounded-lg overflow-hidden h-full">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-1/3 h-full object-cover"
-                />{" "}
-                {/* The image fills half the width and the full height of the card */}
+                <img src={item.image} alt={item.title} className="w-1/3 h-full object-cover"/> {/* The image fills half the width and the full height of the card */}
                 <div className="w-2/3 p-4 flex flex-col justify-between">
                   <div>
                     <h3 className="text-xl font-semibold">{item.title}</h3>
@@ -448,17 +459,11 @@ const Carousel = ({ items }) => {
                   <div className="flex items-center mt-4">
                     <div className="flex-shrink-0">
                       <a href="#" className="block relative">
-                        <img
-                          alt="profile"
-                          src={item.authorImage}
-                          className="mx-auto object-cover rounded-full h-10 w-10 "
-                        />
+                        <img alt="profile" src={item.authorImage} className="mx-auto object-cover rounded-full h-10 w-10 " />
                       </a>
                     </div>
                     <div className="ml-3">
-                      <p className="text-sm font-medium leading-none">
-                        {item.authorName}
-                      </p>
+                      <p className="text-sm font-medium leading-none">{item.authorName}</p>
                       <p className="text-sm text-gray-600">{item.date}</p>
                     </div>
                   </div>
@@ -468,26 +473,22 @@ const Carousel = ({ items }) => {
           ))}
         </div>
       </div>
-      <button
-        onClick={goToPrevious}
-        className="absolute top-1/2 left-0 z-10 p-2 text-white bg-black bg-opacity-50"
-      >
+      <button onClick={goToPrevious} className="absolute top-1/2 left-0 z-10 p-2 text-white bg-black bg-opacity-50">
         Prev
       </button>
-      <button
-        onClick={goToNext}
-        className="absolute top-1/2 right-0 z-10 p-2 text-white bg-black bg-opacity-50"
-      >
+      <button onClick={goToNext} className="absolute top-1/2 right-0 z-10 p-2 text-white bg-black bg-opacity-50">
         Next
       </button>
     </div>
   );
 };
 
-function Card() {
+function Graph() {
   const CustomTooltip = () => (
     <div className="rounded-xl overflow-hidden tooltip-head">
       <div className="flex items-center justify-between p-2">
+        <div className="">Revenue</div>
+        <Icon path="res-react-dash-options" className="w-2 h-2" />
       </div>
       <div className="tooltip-body text-center p-3">
         <div className="text-white font-bold">$1300.50</div>
@@ -501,13 +502,16 @@ function Card() {
         <div className="flex items-center">
           <div className="font-bold text-white">Local Faves</div>
           <div className="flex-grow" />
+
+          <Icon path="res-react-dash-graph-range" className="w-4 h-4" />
+          <div className="ml-2">Last 9 Months</div>
+          <div className="ml-6 w-5 h-5 flex justify-center items-center rounded-full icon-background">
+            ?
+          </div>
         </div>
         <div className="font-bold ml-5">Nov - July</div>
       </div>
-      <div className="bg-blue-900">
-        <Carousel items={items} />
-      </div>
-      
+      <Carousel items={items} />
     </div>
   );
 }
@@ -948,3 +952,7 @@ function Image({ url, className = "w-4 h-4" }) {
 }
 
 export default Discover;
+
+
+
+
