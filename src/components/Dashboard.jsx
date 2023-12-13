@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "../App.css";
 import clsx from "https://cdn.skypack.dev/clsx@1.1.1";
+import { Link } from "react-router-dom";
+
+
 
 const employeeData = [
   {
@@ -67,7 +70,7 @@ const Countrydata = [
   { name: "Muyenga", Members: 1812, id: 4 },
 ];
 
-const STRAPI_URL=process.env.STRAPI_URL;
+const VITE_STRAPI_URL=import.meta.env.VITE_STRAPI_URL;
 
 const sidebarItems = [
   [
@@ -488,7 +491,7 @@ function TrendingPosts() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${STRAPI_URL}/api/posts`);
+        const response = await axios.get(`${VITE_STRAPI_URL}/api/posts`);
         console.log(response.data.data)
         setData(response.data.data); 
       } catch (error) {
@@ -507,7 +510,7 @@ function TrendingPosts() {
         <div className="flex items-center mt-3" key={id}>
           <div className="py-1">{id}</div>
 
-          <div className="ml-2"><a href="">{attributes.title}</a></div>
+          <div className="ml-2"><Link to={`/posts/${attributes.slug}`}>{attributes.title}</Link></div>
           <div className="flex-grow" />
           <div className="flex gap-8">
             Views
