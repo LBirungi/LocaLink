@@ -4,7 +4,7 @@ import Home from "./components/Home";
 import Discover from "./discovercomponents/Discover";
 import Homeland from "./landing/Homeland.jsx";
 import Opportunities from "./servicescomponents/Opportunities.jsx";
-import Signup from "./landing/Signup.jsx";
+import Signup from "./Signup.jsx";
 import AdultLearning from "./learningcomponents/adultlearning.jsx";
 
 function App() {

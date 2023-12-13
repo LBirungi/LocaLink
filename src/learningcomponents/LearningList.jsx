@@ -33,13 +33,18 @@ const LearningList = ({ subscribed }) => {
       <ul>
         {learnings.map((learning) => (
           <li key={learning.id}>
-            <h3>{learning.title}</h3>
-            <p>{learning.description}</p>
+            
+            <h3>{learning.attributes.title}</h3>
+            <p>{learning.attributes.description}</p>
             {/* Render video or other content here */}
             <video width="320" height="240" controls>
-              <source src={video-url} type="video/mp4" />
-              
+              <source src={learning.attributes.videoUrl} type="video/mp4" />
             </video>
+
+
+
+              
+            
           </li>
         ))}
       </ul>
