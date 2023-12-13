@@ -231,19 +231,19 @@ function Headlines() {
               <img className="w-full h-64 object-cover rounded-lg" src="/Road2.jpg" alt="Flooded Roads" />
             </div>
             <div className="mt-4 sm:ml-6">
-              <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
+              <div className="font-bold text-xl mb-2">Flooded Roads</div>
               <p className="text-gray-700 text-base">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                Commuters advised to avoid Entebbe road due to floods near Kajjansi.
               </p>
               <div className="mt-4">
                 <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                  #photography
+                  #Kajjansi
                 </span>
                 <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
                   #travel
                 </span>
                 <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                  #winter
+                  #flooding
                 </span>
               </div>
             </div>
