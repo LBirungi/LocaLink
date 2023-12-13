@@ -1,78 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from "react";
 import "../App.css";
 import clsx from "https://cdn.skypack.dev/clsx@1.1.1";
 
-const employeeData = [
-  {
-    id: 1,
-    name: "Lillian Birungi",
-    username: "@LillianBirungi",
-    rise: true,
-    location: "Nansana",
-    url: "/Lillian.jpeg",
-    lastSeen: "3 days ago",
-  },
+const { useState } = React;
 
-  {
-    id: 2,
-    name: "Ronnie Kagulire",
-    username: "@RonnieKagulire",
-    rise: false,
-    location: "Katabi",
-    url: "/Ronald.png",
-    lastSeen: "3 days ago",
-  },
-
-  {
-    id: 3,
-    name: "Johnson Byaruhanga",
-    username: "@JohnsonByaruhanga",
-    rise: true,
-    location: "Seeta",
-    url: "/Johnson.png",
-    lastSeen: "20 days ago",
-  },
-];
-
-const items = [
-  {
-    image: "/santa.jpeg",
-    title: "Santa is Coming to Town",
-    description:
-      "Uniting Communities,spreading love and crossing cultural boundaries",
-    authorImage: "/Ronald.png",
-  },
-  {
-    image: "/plumber.jpg",
-    title: "Professional plumbing services in your area",
-    description:
-      "From installations to repairs, we fix leaks, manage drainage, and ensure efficient water systems for homes and businesses. Reliable solutions for your plumbing needs!.",
-    authorImage: "/Johnson.png",
-  },
-
-  {
-    image: "/immunisation.webp",
-    title: "Are your child's vaccines up to date – immunise!",
-    description:
-      " Your action today secures a healthier tomorrow for them and their community. Stay strong, stay safe, and vaccinate!",
-    authorImage: "/Lillian.jpeg",
-  },
-];
-
-const Countrydata = [
-  { name: "Makindye", Members: 31190, id: 1, join: true },
-  { name: "Nateete", Members: 11910, id: 2 },
-  { name: "Najjera", Members: 1920, id: 3 },
-  { name: "Muyenga", Members: 1812, id: 4 },
-];
-
-const Posts = [
-  { feed: "Flooded Roads", Post: 1190, id: 1 },
-  { feed: "New Year Events", Post: 1910, id: 2 },
-  { feed: "Thieves Caught", Post: 1920, id: 3 },
-  { feed: "Christmas Rush", Post: 1812, id: 4 },
-];
 
 const sidebarItems = [
   [
@@ -95,12 +26,8 @@ const sidebarItems = [
   ],
 ];
 
-const Dashboard = () => {
+const PostPage = () => {
   const [showSidebar, onSetShowSidebar] = useState(false);
-
-
-
-
   return (
     <div className="flex">
       <Sidebar
@@ -118,14 +45,7 @@ const Dashboard = () => {
   );
 };
 
-const handleJoin = (communityId) => {
-  // Here, you can implement the logic for joining a community
-  // For example, you might make an API call to join the community
-  // or update the state to indicate that the user has joined this community
 
-  // For demonstration purposes, let's log a message indicating the community ID being joined
-  console.log(`Joining community with ID: ${communityId}`);
-};
 
 function Sidebar({ onSidebarHide, showSidebar }) {
   const [selected, setSelected] = useState("0");
@@ -227,24 +147,19 @@ function Content({ onSidebarHide }) {
 
   return (
     <div className="flex w-full">
-      <div className="w-full h-screen hidden sm:block sm:w-20 xl:w-60 flex-shrink-0">
+      <div className="w-full hidden sm:block sm:w-20 xl:w-60 flex-shrink-0">
         .
       </div>
       <div className=" h-screen flex-grow overflow-x-hidden overflow-auto flex flex-wrap content-start p-2">
         <div className="w-full sm:flex p-2 items-end">
           <div className="sm:flex-grow flex justify-between">
-            <div className="">
-              <div className="flex items-center">
-                <div className="text-3xl font-bold text-white">Hello Grace</div>
-              </div>
-            </div>
             <IconButton
               icon="res-react-dash-sidebar-open"
               className="block sm:hidden"
               onClick={onSidebarHide}
             />
           </div>
-          
+
           <div className="mr-4">
             <button
               className="bg-blue-600 py-2 inline-flex px-4 flex items-center font-semibold justify-center gap-x-2 text-md font-semibold rounded-lg border border-transparent text-white  hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
@@ -288,273 +203,57 @@ function Content({ onSidebarHide }) {
             </form>
           </div>
         </div>
-        {employeeData.map(
-          ({ id, name, username, rise, location, url, lastSeen }) => (
-            <NameCard
-              key={id}
-              id={id}
-              name={name}
-              username={username}
-              rise={rise}
-              location={location}
-              url={url}
-              lastSeen={lastSeen}
-            />
-          )
-        )}
 
-        <div className="w-full p-2 lg:w-1/2">
-          <div className="rounded-lg bg-card sm:h-80 ">
-            <Card />
-          </div>
-        </div>
-
-        <div className="w-full p-2 lg:w-1/2">
-          <div className="rounded-lg bg-card h-80">
-            <NearbyCommunities />
-          </div>
-        </div>
         <div className="w-full p-2 lg:w-3/3">
-          <div className="rounded-lg bg-card overflow-hidden h-80">
+          <div className="rounded-lg bg-card overflow-hidden h-70vh">
             <Headlines />
           </div>
         </div>
-       
-      </div>
-    </div>
-  );
-}
-
-function NameCard({ name, username, location, url, lastSeen }) {
-  return (
-    <div className="w-full p-2 lg:w-1/3">
-      <div className="rounded-lg bg-card flex justify-between p-3 h-32">
-        <div className="">
-          <div className="flex items-center">
-            <Image url={url} className="w-11 h-11" />
-            <div className="ml-2">
-              <div className="flex items-center">
-                <div className="mr-2 font-bold text-white">{name}</div>
-                <Icon path="res-react-dash-tick" />
-              </div>
-              <div className="text-sm ">{username}</div>
-            </div>
-          </div>
-
-          <div className="text-sm  mt-2">{`${location}`}</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <button
-            type="button"
-            className="py-1 px-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-          >
-            Connect
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="icon icon-tabler icon-tabler-affiliate"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-              stroke="currentColor"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M5.931 6.936l1.275 4.249m5.607 5.609l4.251 1.275" />
-              <path d="M11.683 12.317l5.759 -5.759" />
-              <path d="M5.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0" />
-              <path d="M18.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0" />
-              <path d="M18.5 18.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0" />
-              <path d="M8.5 15.5m-4.5 0a4.5 4.5 0 1 0 9 0a4.5 4.5 0 1 0 -9 0" />
-            </svg>
-          </button>
-          <div className="text-sm py-6">{lastSeen}</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-const Carousel = ({ items }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const goToPrevious = () => {
-    setActiveIndex((prevIndex) =>
-      prevIndex === 0 ? items.length - 1 : prevIndex - 1
-    );
-  };
-  const goToNext = () => {
-    setActiveIndex((prevIndex) =>
-      prevIndex === items.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  return (
-    <div className="relative w-full pt-4 sm:h-80 h-60 ">
-      <div className="overflow-hidden w-full ">
-        <div
-          className="flex h-60 transition-transform duration-700"
-          style={{ transform: `translateX(-${activeIndex * 100}%)` }}
-        >
-          {items.map((item, index) => (
-            <div key={index} className="flex-none w-full ">
-              <div className="flex items-center bg-white shadow-lg rounded-lg overflow-hidden h-full">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className=" h-2 w-1/3 h-full object-cover"
-                />
-                {""}
-                {/* The image fills half the width and the full height of the card */}
-                <div className="w-2/3 p-4 flex flex-col justify-between">
-                  <div>
-                    <h1 className="mt-auto text-xl font-semibold">
-                      {item.title}
-                    </h1>
-                    <p className="text-gray-700 py-4">{item.description}</p>
-                  </div>
-                  <div className="flex items-center mt-4">
-                    <div className="flex-shrink-0">
-                      <a href="#" className="block relative">
-                        <img
-                          alt="profile"
-                          src={item.authorImage} //item.authorImage Lillian.jpeg
-                          className="mx-auto object-cover rounded-full h-10 w-10 "
-                        />
-                      </a>
-                    </div>
-                    <div className="ml-3">
-                      <p className="text-sm font-medium leading-none">
-                        {item.authorName}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <button
-        onClick={goToPrevious}
-        className="absolute top-1/2 left-0 z-10 p-2 text-white bg-black bg-opacity-50"
-      >
-        Prev
-      </button>
-      <button
-        onClick={goToNext}
-        className="absolute top-1/2 right-0 z-10 p-2 text-white bg-black bg-opacity-50"
-      >
-        Next
-      </button>
-    </div>
-  );
-};
-
-function Card() {
-  return (
-    <div className="flex p-4 h-full flex-col">
-      <div className="">
-        <div className="flex items-center">
-          <div className="font-bold text-white">Local Faves</div>
-          <div className="flex-grow" />
-        </div>
-      </div>
-      <div className="">
-        <Carousel className=" h-2/3" items={items} />
-      </div>
-    </div>
-  );
-}
-
-function NearbyCommunities() {
-  return (
-    <div className="flex p-4 flex-col h-full">
-      <div className="flex justify-between items-center">
-        <div className="text-white font-bold">Communities</div>
-        <Icon path="res-react-dash-plus" className="w-5 h-5" />
-      </div>
-      <div className="flex gap-4">Areas</div>
-      {Countrydata.map(({ name, Members, id, join }) => (
-        <div className="flex items-center mt-3" key={id}>
-          <div className="">{id}</div>
-
-          <div className="ml-3">{name}</div>
-          <div className="flex-grow" />
-
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-2 rounded-md">
-            <span></span>
-            Join
-          </button>
-        </div>
-      ))}
-      <div className="flex-grow" />
-      <div className="flex justify-center">
-        <div className="">See More</div>
-      </div>
-    </div>
-  );
-}
-
-function TrendingPosts() {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:1337/api/posts');
-        console.log(response.data.data)
-        setData(response.data.data); // Assuming your data is an array, adjust as needed
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  return (
- 
-    <div className="flex p-4 flex-col h-full justify-between ">
-      <div className="flex gap-4 mt-4">Trending</div>
-      {data.map(({ id, attributes }) => (
-        <div className="flex items-center mt-3" key={id}>
-          <div className="py-1">{id}</div>
-
-          <div className="ml-2"><a href="">{attributes.title}</a></div>
-          <div className="flex-grow" />
-          <div className="flex gap-8">
-            Views
-            {/* <div className="flex-grow flex gap-8">{`${Post.toLocaleString()}`}</div> */}
-          </div>
-        </div>
-      ))}
-      <div className="flex-grow" />
-      <div className="flex justify-center">
-        <div className="">See More</div>
       </div>
     </div>
   );
 }
 
 function Headlines() {
-  return (
-    <div className="flex justify-center w-full px-4 md:px-8 lg:px-12 xl:px-20">
-      <div className="max-w-screen-lg w-full">
-        {/* Header */}
-        <div className="mt-10 h-8 lg:h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-          <h2 className="text-lg lg:text-xl font-semibold text-white">
-            Trending Posts
-          </h2>
-        </div>
-        {/* TrendingPosts component */}
-        <div className="overflow-hidden">
-          <TrendingPosts />
+    return (
+      <div className="mt-4 mb-4 flex justify-center w-full px-4 md:px-8 lg:px-12 xl:px-20 h-screen">
+        <div className="max-w-screen-lg w-full h-full bg-gray-100 p-6 rounded-lg shadow-lg">
+          {/* Header */}
+          <div className="mt-4">
+            <h2 className="text-2xl lg:text-3xl font-semibold text-blue-800">
+              Flooded Roads
+            </h2>
+          </div>
+  
+          {/* Blog Post */}
+          <div className="mt-6 flex flex-col sm:flex-row">
+            <div className="flex-shrink-0 w-full sm:w-64">
+              <img className="w-full h-64 object-cover rounded-lg" src="/Road2.jpg" alt="Flooded Roads" />
+            </div>
+            <div className="mt-4 sm:ml-6">
+              <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
+              <p className="text-gray-700 text-base">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+              </p>
+              <div className="mt-4">
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                  #photography
+                </span>
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                  #travel
+                </span>
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                  #winter
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
+  
+  
 
 function SidebarIcons({ id }) {
   const icons = {
@@ -770,8 +469,8 @@ function Image({ url, className = "w-4 h-4" }) {
 }
 
 const Modal = ({ showModal, setShowModal }) => {
-  const [postTitle, setPostTitle] = useState('');
-  const [postContent, setPostContent] = useState('');
+  const [postTitle, setPostTitle] = useState("");
+  const [postContent, setPostContent] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -793,22 +492,25 @@ const Modal = ({ showModal, setShowModal }) => {
       {showModal ? (
         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
           <div className="relative w-auto my-6 mx-auto max-w-6xl">
-            
             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-              
               <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
                 <h3 className="text-2xl font-semibold">What's on your mind?</h3>
                 <button
                   className="p-1 ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                   onClick={handleCancel}
                 >
-                  <span className="bg-transparent text-black h-6 w-6 text-2xl block outline-none focus:outline-none">×</span>
+                  <span className="bg-transparent text-black h-6 w-6 text-2xl block outline-none focus:outline-none">
+                    ×
+                  </span>
                 </button>
               </div>
-              
+
               <form className="p-6 flex-auto" onSubmit={handleSubmit}>
                 <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="post-title">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="post-title"
+                  >
                     Title
                   </label>
                   <input
@@ -821,7 +523,10 @@ const Modal = ({ showModal, setShowModal }) => {
                   />
                 </div>
                 <div className="mb-6">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="post-content">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="post-content"
+                  >
                     Content
                   </label>
                   <textarea
@@ -832,7 +537,7 @@ const Modal = ({ showModal, setShowModal }) => {
                     onChange={(e) => setPostContent(e.target.value)}
                   />
                 </div>
-                
+
                 <div className="flex items-center justify-end p-2 border-t border-solid border-gray-300 rounded-b">
                   <button
                     className="text-gray-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
@@ -844,7 +549,6 @@ const Modal = ({ showModal, setShowModal }) => {
                   <button
                     className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                     type="submit"
-                    
                   >
                     Submit Post
                   </button>
@@ -858,4 +562,4 @@ const Modal = ({ showModal, setShowModal }) => {
   );
 };
 
-export default Dashboard;
+export default PostPage;
