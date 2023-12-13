@@ -48,16 +48,16 @@ To run this project locally, follow these steps:
     ```bash
     npm start
     ```
-4. **Usage:** 
-User Registration/Login: Users can create accounts or log in to access the platform.
-Exploring Features: Navigate through the forums, events, profiles, and collaboration opportunities.
-Contributing: Engage in discussions, share resources, and collaborate with others to contribute to the community's growth.
+## Usage
+- User Registration/Login: Users can create accounts or log in to access the platform.
+- Exploring Features: Navigate through the forums, events, profiles, and collaboration opportunities.
+- Contributing: Engage in discussions, share resources, and collaborate with others to contribute to the community's growth.
 
-5. **Contributing:** 
+## Contributing 
 We welcome contributions from the community to enhance LocaLink. To contribute:
-
-Fork the repository.
-Create a new branch (git checkout -b feature/improvement).
-Make modifications and commit changes (git commit -am 'Add new feature').
-Push the branch (git push origin feature/improvement).
-Create a pull request.
+ 
+- Fork the repository.
+- Create a new branch (git checkout -b feature/improvement).
+- Make modifications and commit changes (git commit -am 'Add new feature').
+- Push the branch (git push origin feature/improvement).
+- Create a pull request.
