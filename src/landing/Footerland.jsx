@@ -1,24 +1,32 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faTwitter, faLinkedin, faGithub, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import {
+  faFacebook,
+  faTwitter,
+  faLinkedin,
+  faGithub,
+  faWhatsapp,
+} from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { Bold } from "tabler-icons-react";
 
-function Footerland(){
-    return(
-        <footer>
+function Footerland() {
+  return (
+    <>
+      <footer>
         <div
           style={{
-            backgroundColor: "#333",
+            backgroundColor: "blue-950",
             color: "#fff",
             padding: "20px",
             textAlign: "center",
+            font: "Bold",
           }}
         >
-          This is the footer. Customize this section according to your
-          requirements.
+          Enjoy your Experience with LocaLink
           <section id="contact">
             <div id="contact-title">
-              <h1>Connect With Me</h1>
+              <h1>Connect With Us</h1>
             </div>
             <div id="contacticons">
               <a href="#" className="fa fa-facebook">
@@ -46,9 +54,7 @@ function Footerland(){
           </section>
         </div>
       </footer>
-    )
-        
-    
+    </>
+  );
 }
-
 export default Footerland;
