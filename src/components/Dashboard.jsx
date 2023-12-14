@@ -771,11 +771,13 @@ const Modal = ({ showModal, setShowModal }) => {
     setShowModal(false);
     
 
-axios.post(`${VITE_STRAPI_URL}/api/posts`, {
+axios.post(`${VITE_STRAPI_URL}/api/posts`, 
+{
   // Data to be sent in the POST request's body
-  title:postTitle ,
-  content: postContent,
-  slug:slugify(postTitle)
+    "data":{title:postTitle ,
+      content: postContent,
+      slug:slugify(postTitle)
+  }
 })
 .then(response => {
   // Handle the response data
