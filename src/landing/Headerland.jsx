@@ -28,9 +28,9 @@ const Headerland = () => {
     <Navland />
 
     <div style={headerStyle}>
-      <div className="text-white"
+      <div className="text-white "
       
-      style={{ fontSize: '30px', fontStyle: 'italic' }}
+      style={{ fontStyle: 'italic',margin:"60px" }}
       
       >
 
@@ -42,7 +42,7 @@ const Headerland = () => {
 
       
         
-          <h1>WELCOME TO LOCalink</h1>
+          <div className="font-bold text-xl">WELCOME TO LOCalink</div>
           <h2>ABOUT US</h2>
           <p>
             LocaLink addresses <br /> social-economic
